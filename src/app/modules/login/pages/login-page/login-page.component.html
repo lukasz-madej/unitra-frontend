@@ -1,0 +1,31 @@
+<div id="app-login">
+  <div class="login-card">
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar class="login-avatar"></div>
+        <mat-card-title>Unitra Database</mat-card-title>
+        <mat-card-subtitle>Zaloguj się</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="login-form" [formGroup]="loginForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Login</mat-label>
+          <input matInput placeholder="Login" formControlName="login">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Hasło</mat-label>
+          <input matInput [type]="passwordInputType" placeholder="Hasło" formControlName="password">
+          <mat-icon
+            matSuffix
+            class="show-password-icon"
+            [ngClass]="showPassword ? '' : 'active'"
+            (click)="toggleShowPassword()"
+          >remove_red_eye</mat-icon>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions class="login-actions">
+        <a href="">Zapomniałem hasła</a>
+        <button mat-raised-button color="primary">Zaloguj</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

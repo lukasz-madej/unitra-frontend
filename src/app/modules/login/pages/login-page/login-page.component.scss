@@ -1,0 +1,47 @@
+#app-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  .login-card {
+    max-width: 300px;
+
+    .login-avatar {
+      background-image: url('../../../../../assets/images/logo.png');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 0;
+    }
+
+    .login-form {
+      .mat-form-field {
+        width: 100%;
+
+        .show-password-icon {
+          opacity: 0.5;
+
+          &:hover {
+            cursor: pointer;
+          }
+
+          &.active {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    .login-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0;
+
+      button {
+        margin: 0;
+      }
+    }
+  }
+}
