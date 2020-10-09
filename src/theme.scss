@@ -169,23 +169,23 @@ $mat-primary: (
 $theme-primary: mat-palette($mat-primary, main, lighter, darker);
 
 body {
-  --accent-color: #e7c59a;
-  --accent-lighter-color: #f8eee1;
-  --accent-darker-color: #ddb07e;
-  --text-accent-color: #{$dark-primary-text};
+  --accent-color: #44803c;
+  --accent-lighter-color: #c7d9c5;
+  --accent-darker-color: #2d6327;
+  --text-accent-color: #{$light-primary-text};
   --text-accent-lighter-color: #{$dark-primary-text};
-  --text-accent-darker-color: #{$dark-primary-text};
+  --text-accent-darker-color: #{$light-primary-text};
 }
 
 $mat-accent: (
-  main: #e7c59a,
-  lighter: #f8eee1,
-  darker: #ddb07e,
-  200: #e7c59a, // For slide toggle,
+  main: #44803c,
+  lighter: #c7d9c5,
+  darker: #2d6327,
+  200: #44803c, // For slide toggle,
   contrast : (
-    main: $dark-primary-text,
+    main: $light-primary-text,
     lighter: $dark-primary-text,
-    darker: $dark-primary-text,
+    darker: $light-primary-text,
   )
 );
 $theme-accent: mat-palette($mat-accent, main, lighter, darker);
