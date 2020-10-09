@@ -9,8 +9,8 @@
       <mat-card-content class="login-form" [formGroup]="loginForm">
         <mat-form-field appearance="outline">
           <mat-label>Login</mat-label>
-          <input matInput placeholder="Login" formControlName="login">
-          <mat-error *ngIf="login.invalid">To pole jest wymagane!</mat-error>
+          <input matInput placeholder="Login" formControlName="username">
+          <mat-error *ngIf="username.invalid">To pole jest wymagane!</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Hasło</mat-label>

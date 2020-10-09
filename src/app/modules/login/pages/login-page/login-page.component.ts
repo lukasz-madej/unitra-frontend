@@ -14,8 +14,8 @@ export class LoginPageComponent implements OnInit {
   showPassword: boolean;
   loginForm: FormGroup;
 
-  get login(): AbstractControl {
-    return this.loginForm.get('login');
+  get username(): AbstractControl {
+    return this.loginForm.get('username');
   }
   get password(): AbstractControl {
     return this.loginForm.get('password');
@@ -28,9 +28,11 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this._formBuilder.group({
-      login: ['', [Validators.required]],
+      username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
+
+    this._loginService.checkUserSession();
   }
 
   toggleShowPassword = (): void => {
@@ -40,7 +42,7 @@ export class LoginPageComponent implements OnInit {
 
   onLogin = (): void => {
     if (this.loginForm.valid) {
-      this._loginService.userLogin(this.loginForm.value);
+      this._loginService.login(this.loginForm.value);
     } else {
       this.loginForm.markAllAsTouched();
     }

@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Credentials } from '../../../modules/login/models/login.model';
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, shareReplay, tap } from 'rxjs/operators';
+import { ApiService } from '../../api/services/api.service';
+import { environment } from '../../../../environments/environment';
+import { User } from '../../../shared/models/user.model';
+import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,31 +14,54 @@ import { delay } from 'rxjs/operators';
 export class AuthService {
 
   private _token: string;
-  private _isLoggedIn: boolean;
+
+  get isLoggedIn(): boolean {
+    return moment().isBefore(moment(JSON.parse(this.expiresAt)));
+  }
 
   get token(): string {
-    if (this._token) {
-      return this._token;
-    } else {
-      this._token = localStorage.getItem('UNITRA_TOKEN');
-    }
+    return this._token || localStorage.getItem(environment.tokenKey) || null;
   }
-  get isLoggedIn(): boolean {
-    return this._isLoggedIn;
+  set token(token: string) {
+    localStorage.setItem(environment.tokenKey, token);
+    this._token = token;
   }
 
-  constructor() {
-    this._isLoggedIn = false;
+  get expiresAt(): string {
+    return localStorage.getItem(environment.expirationKey);
+  }
+  set expiresAt(expiresAt: string) {
+    localStorage.setItem(environment.expirationKey, expiresAt);
   }
 
-  authenticate = (credentials: Credentials): Observable<any> => {
-    this._isLoggedIn = false;
-    this._token = 'TESTTOKEN';
-    localStorage.setItem('UNITRA_TOKEN', this._token);
+  constructor(private _api: ApiService, private _router: Router) {
+  }
 
-    return of(this.isLoggedIn)
+  authenticate = (credentials: Credentials): Observable<User> => {
+    return this._api.post('users/authenticate', credentials)
       .pipe(
-        delay(2000)
+        tap((response: any): void => {
+          console.log(response);
+          this.token = response.token;
+          this.expiresAt = JSON.stringify(moment().add(response.expiresIn, 'seconds').valueOf());
+        }),
+        map((response: any): User => {
+          const { username, admin, created_at, updated_at } = response.user;
+
+          return {
+            username,
+            isAdmin: admin,
+            createdAt: new Date(created_at),
+            updatedAt: new Date(updated_at)
+          };
+        }),
+        shareReplay()
       );
+  }
+
+  logout = (): void => {
+    localStorage.removeItem(environment.tokenKey);
+    localStorage.removeItem(environment.expirationKey);
+    this._router.navigateByUrl('/login');
   }
 }
