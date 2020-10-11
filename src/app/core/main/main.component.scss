@@ -1,8 +1,8 @@
-#app-dashboard {
+#app-main {
   height: 100%;
   padding: 15px;
 
-  .dashboard-container {
+  .main-container {
     width: 100%;
     height: 100%;
     padding: 0;
@@ -14,6 +14,7 @@
       height: 100%;
       display: flex;
       flex-direction: column;
+      background-color: #fafafa;
 
       .nav-bar {
         height: 100px;

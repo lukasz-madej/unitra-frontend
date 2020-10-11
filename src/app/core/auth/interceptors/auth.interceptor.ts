@@ -3,13 +3,12 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Observable, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { catchError, finalize } from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { LoadingService } from '../../../shared/services/loading/loading.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private _authService: AuthService, private _router: Router, private _loadingService: LoadingService) {
+  constructor(private _authService: AuthService, private _loadingService: LoadingService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -32,7 +31,6 @@ export class AuthInterceptor implements HttpInterceptor {
         catchError((error: HttpErrorResponse): Observable<any> => {
           if (error.status === 401) {
             this._authService.logout();
-            this._router.navigateByUrl('/login');
           }
           return throwError(error);
         }),
