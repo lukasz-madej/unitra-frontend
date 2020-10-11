@@ -1,0 +1,20 @@
+<div id="app-top-bar">
+  <div class="search">
+    <mat-form-field>
+      <mat-label>Wyszukaj...</mat-label>
+      <input matInput placeholder="Wyszukaj...">
+    </mat-form-field>
+    <button mat-mini-fab color="white">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  <div class="action-button" matTooltip="Moje konto">
+    <mat-icon>person</mat-icon>
+  </div>
+  <div class="action-button" [matTooltip]="notificationsCount > 0 ? notificationsCount + ' nowych powiadomień' : 'Powiadomienia'">
+    <mat-icon matBadge="15" matBadgeColor="primary" matBadgeSize="small">notifications</mat-icon>
+  </div>
+  <div class="action-button" matTooltip="Wyloguj" (click)="onLogout()">
+    <mat-icon>logout</mat-icon>
+  </div>
+</div>

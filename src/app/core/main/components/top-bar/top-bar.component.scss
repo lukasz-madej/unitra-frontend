@@ -1,0 +1,26 @@
+#app-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+
+  .search {
+    margin-right: 10px;
+  }
+
+  .action-button {
+    margin: 0 5px;
+
+    &:hover {
+      cursor: pointer;
+
+      .mat-icon {
+        opacity: 0.8;
+      }
+    }
+
+    .mat-icon {
+      transition: all ease 0.2s;
+    }
+  }
+}
