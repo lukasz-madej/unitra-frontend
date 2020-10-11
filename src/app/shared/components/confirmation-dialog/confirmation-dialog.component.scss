@@ -1,0 +1,13 @@
+#app-confirmation-dialog {
+  padding-bottom: 15px;
+
+  h2 {
+    margin-bottom: 5px;
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+  }
+}
