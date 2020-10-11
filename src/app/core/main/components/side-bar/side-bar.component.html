@@ -1,0 +1,14 @@
+<div id="app-side-bar">
+  <div class="logo">
+    <img src="../../../../../assets/images/logo.png" alt="Unitra Database">
+    <div class="logo-text">Unitra Database</div>
+  </div>
+  <ul class="navigation">
+    <li>Dashboard</li>
+    <hr />
+    <li *ngFor="let item of categories">{{ item.name }}</li>
+    <hr />
+    <li>Zestawy</li>
+    <li>Kategorie</li>
+  </ul>
+</div>
