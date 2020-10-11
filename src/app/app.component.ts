@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { LoadingService } from './shared/services/loading.service';
+import { ChangeDetectorRef, Component, OnChanges, OnInit } from '@angular/core';
+import { LoadingService } from './shared/services/loading/loading.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
   showLoadingIndicator: boolean;
 
-  constructor(private _loadingService: LoadingService) {
+  constructor(private _loadingService: LoadingService, private _changeDetectorRef: ChangeDetectorRef) {
     this.showLoadingIndicator = false;
   }
 
@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
       )
       .subscribe((showLoading: boolean): void => {
         this.showLoadingIndicator = showLoading;
+        this._changeDetectorRef.detectChanges();
       });
   }
 }

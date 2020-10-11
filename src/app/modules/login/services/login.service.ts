@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Credentials } from '../models/login.model';
-import { LoadingService } from '../../../shared/services/loading.service';
+import { LoadingService } from '../../../shared/services/loading/loading.service';
 import { AuthService } from '../../../core/auth/services/auth.service';
 import { finalize, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
