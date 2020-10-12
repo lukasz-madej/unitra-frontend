@@ -6,6 +6,15 @@
 
   .search {
     margin-right: 10px;
+
+    .mat-mini-fab {
+      width: 32px;
+      height: 32px;
+
+      .mat-icon {
+        font-size: 18px;
+      }
+    }
   }
 
   .action-button {
