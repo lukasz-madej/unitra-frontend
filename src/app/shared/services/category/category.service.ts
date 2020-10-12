@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../../core/api/services/api.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, map, take, tap } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { Category } from '../../models/category.model';
 import { SnackBarService } from '../snack-bar/snack-bar.service';
 
