@@ -10,6 +10,7 @@ import { ConfirmationDialog } from '../../../../shared/models/confirmation-dialo
 import { ConfirmationDialogService } from '../../../../shared/services/confirmation-dialog/confirmation-dialog.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCategoryComponent } from '../../components/add-category/add-category.component';
+import { EditCategoryComponent } from '../../components/edit-category/edit-category.component';
 
 @Component({
   selector: 'app-categories-page',
@@ -68,7 +69,7 @@ export class CategoriesPageComponent implements AfterViewInit {
 
   onEditClick = (event: Category): void => {
     this._actionItem = event;
-    console.log('edit click');
+    this._dialog.open(EditCategoryComponent, { data: event });
   }
 
   onDeleteClick = (event: Category): void => {

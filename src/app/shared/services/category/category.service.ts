@@ -41,6 +41,7 @@ export class CategoryService {
         this._list$.next(response);
       });
   }
+
   add = (category: Partial<Category>): Observable<void> => {
     return this._api.post('categories', category)
       .pipe(
@@ -54,8 +55,21 @@ export class CategoryService {
       );
   }
 
+  edit = (id: number, category: Partial<Category>): Observable<void> => {
+    return this._api.put(`categories/${id}`, category)
+      .pipe(
+        take(1),
+        tap((): void => {
+          this.getList();
+          this._snackBarService.open(`Zmiany w kategorii "${category.name}" zostały zapisane.`);
+        }, (): void => {
+          this._snackBarService.open(`Wystąpił błąd podczas edycji kategorii.`, undefined, { panelClass: 'error' });
+        })
+      );
+  }
+
   delete = (id: number, name: string): void => {
-    this._api.delete(`categories/${id + 156}`)
+    this._api.delete(`categories/${id}`)
       .pipe(
         take(1)
       )

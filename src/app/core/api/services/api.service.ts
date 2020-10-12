@@ -30,6 +30,13 @@ export class ApiService {
       );
   }
 
+  put = (endpoint: string, payload: any): Observable<any> => {
+    return this._http.put(this._getUrl(endpoint), payload)
+      .pipe(
+        catchError(this._showErrorSnackBar)
+      );
+  }
+
   delete = (endpoint: string): Observable<any> => {
     return this._http.delete(this._getUrl(endpoint))
       .pipe(

@@ -16,9 +16,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { EditCategoryComponent } from './components/edit-category/edit-category.component';
 
 @NgModule({
-  declarations: [CategoriesPageComponent, AddCategoryComponent],
+  declarations: [CategoriesPageComponent, AddCategoryComponent, EditCategoryComponent],
   imports: [
     CommonModule,
     SharedModule,

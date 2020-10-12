@@ -1,0 +1,23 @@
+#app-edit-category {
+  padding-bottom: 15px;
+  width: 300px;
+
+  h2 {
+    margin-bottom: 5px;
+  }
+
+  form {
+    .mat-form-field {
+      display: block;
+
+      textarea {
+        height: 70px;
+      }
+    }
+
+    .mat-dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
