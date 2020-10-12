@@ -1,0 +1,64 @@
+#app-categories-page {
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -20px;
+  }
+
+  table {
+    width: 100%;
+
+    .cell-description {
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .cell-actions {
+      text-align: right;
+
+      .mat-icon-button {
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+
+        .mat-icon {
+          width: 20px;
+          height: 20px;
+          font-size: 20px;
+          line-height: 20px;
+
+          &:not(.mat-warn) {
+            color: rgba(44, 44, 44, 0.65);
+          }
+        }
+      }
+    }
+
+    .header-align-right {
+      padding: 21px 24px 21px 0;
+      text-align: right;
+    }
+  }
+
+  .no-records {
+    display: flex;
+    justify-content: center;
+    color: rgba(44, 44, 44, 0.65);
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(44, 44, 44, 0.12);
+  }
+
+  .mat-paginator {
+    .mat-paginator-range-actions {
+      button {
+        svg {
+          height: 18px;
+        }
+      }
+    }
+  }
+}
+
+

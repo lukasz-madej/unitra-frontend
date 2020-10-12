@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [LoadingComponent, PanelComponent, ConfirmationDialogComponent],
@@ -15,7 +16,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatProgressSpinnerModule,
     MatCardModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
   ],
   exports: [
     LoadingComponent,
@@ -23,6 +25,9 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   entryComponents: [
     ConfirmationDialogComponent
+  ],
+  providers: [
+    MatSnackBar
   ]
 })
 export class SharedModule { }

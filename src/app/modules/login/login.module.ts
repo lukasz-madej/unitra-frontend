@@ -8,7 +8,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [LoginPageComponent],
@@ -20,11 +19,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    ReactiveFormsModule,
-    MatSnackBarModule
-  ],
-  providers: [
-    MatSnackBar
+    ReactiveFormsModule
   ]
 })
 export class LoginModule { }

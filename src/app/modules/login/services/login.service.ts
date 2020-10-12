@@ -4,8 +4,8 @@ import { LoadingService } from '../../../shared/services/loading/loading.service
 import { AuthService } from '../../../core/auth/services/auth.service';
 import { finalize, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../../shared/models/user.model';
+import { SnackBarService } from '../../../shared/services/snack-bar/snack-bar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class LoginService {
     private _loadingService: LoadingService,
     private _authService: AuthService,
     private _router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBarService: SnackBarService
   ) { }
 
   login = (credentials: Credentials): void => {
@@ -33,7 +33,7 @@ export class LoginService {
         console.log(response);
         this._navigateToDashboard();
       }, (): void => {
-        this._snackBar.open('Nieprawidłowy login i / lub hasło.', 'Zamknij', { duration: 5000, verticalPosition: 'top' });
+        this._snackBarService.open('Nieprawidłowy login i / lub hasło.');
       });
   }
 

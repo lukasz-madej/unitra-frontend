@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +9,10 @@ import { CoreModule } from './core/core.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/auth/interceptors/auth.interceptor';
+import localePl from '@angular/common/locales/pl';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localePl);
 
 @NgModule({
   declarations: [
@@ -22,9 +26,10 @@ import { AuthInterceptor } from './core/auth/interceptors/auth.interceptor';
     SharedModule,
     MatSnackBarModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
-  }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'pl-PL' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

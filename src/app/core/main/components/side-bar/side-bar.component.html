@@ -7,8 +7,8 @@
     <li>Dashboard</li>
     <hr />
     <li *ngFor="let item of categories">{{ item.name }}</li>
-    <hr />
+    <hr *ngIf="categories.length" />
     <li>Zestawy</li>
-    <li>Kategorie</li>
+    <li routerLink="categories">Kategorie</li>
   </ul>
 </div>

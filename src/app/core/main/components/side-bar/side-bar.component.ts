@@ -18,7 +18,7 @@ export class SideBarComponent implements OnInit {
   constructor(private _categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this._categoryService.getCategoryList()
+    this._categoryService.list$
       .pipe(
         takeUntil(this._unsubscribe$)
       )

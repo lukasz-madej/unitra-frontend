@@ -22,5 +22,9 @@ export class ApiService {
     return this._http.post(this._getUrl(endpoint), payload);
   }
 
+  delete = (endpoint: string): Observable<any> => {
+    return this._http.delete(this._getUrl(endpoint));
+  }
+
   private _getUrl = (endpoint: string): string => this._apiUrl + endpoint;
 }
