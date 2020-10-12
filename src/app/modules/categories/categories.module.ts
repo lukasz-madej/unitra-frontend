@@ -10,9 +10,15 @@ import { getPaginatorTranslation } from '../../shared/translations/paginator.tra
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { AddCategoryComponent } from './components/add-category/add-category.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
-  declarations: [CategoriesPageComponent],
+  declarations: [CategoriesPageComponent, AddCategoryComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -22,7 +28,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatPaginatorModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: getPaginatorTranslation() }

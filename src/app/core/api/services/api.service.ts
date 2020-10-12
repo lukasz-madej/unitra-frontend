@@ -40,7 +40,9 @@ export class ApiService {
   private _getUrl = (endpoint: string): string => this._apiUrl + endpoint;
 
   private _showErrorSnackBar = (error: HttpErrorResponse): Observable<any> => {
-    this._snackBarService.open('Coś poszło nie tak. Sróbuj ponownie później.');
+    if (error.status >= 500) {
+      this._snackBarService.open('Coś poszło nie tak. Sróbuj ponownie później.');
+    }
     return throwError(error);
   }
 }

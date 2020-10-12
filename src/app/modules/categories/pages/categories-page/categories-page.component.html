@@ -1,7 +1,7 @@
 <div id="app-categories-page">
   <app-panel header="Lista kategorii">
     <div class="actions">
-      <button mat-raised-button color="primary">Dodaj kategorię</button>
+      <button mat-raised-button color="primary" (click)="onAddClick()">Dodaj kategorię</button>
     </div>
     <table mat-table matSort [dataSource]="dataSource">
       <ng-container matColumnDef="id">

@@ -8,6 +8,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationDialog } from '../../../../shared/models/confirmation-dialog.model';
 import { ConfirmationDialogService } from '../../../../shared/services/confirmation-dialog/confirmation-dialog.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddCategoryComponent } from '../../components/add-category/add-category.component';
 
 @Component({
   selector: 'app-categories-page',
@@ -32,7 +34,8 @@ export class CategoriesPageComponent implements AfterViewInit {
   constructor(
     private _categoryService: CategoryService,
     private _confirmationDialogService: ConfirmationDialogService,
-    private _changeDetectorRef: ChangeDetectorRef
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _dialog: MatDialog
   ) {
     this.displayedColumns = ['id', 'name', 'description', 'createdAt', 'updatedAt', 'active', 'actions'];
     this.confirmationDialogOptions = {
@@ -57,6 +60,10 @@ export class CategoriesPageComponent implements AfterViewInit {
         this.noData = this.dataSource.data.length === 0;
         this._changeDetectorRef.detectChanges();
       });
+  }
+
+  onAddClick = (): void => {
+    this._dialog.open(AddCategoryComponent);
   }
 
   onEditClick = (event: Category): void => {

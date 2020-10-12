@@ -18,3 +18,15 @@ a {
     color: #195514;
   }
 }
+
+.mat-snack-bar-container {
+  &.error {
+    background-color: var(--warn-color);;
+
+    .mat-simple-snackbar {
+      span {
+        color: #fff;
+      }
+    }
+  }
+}

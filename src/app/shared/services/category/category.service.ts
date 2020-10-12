@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../../core/api/services/api.service';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, map, take, tap } from 'rxjs/operators';
 import { Category } from '../../models/category.model';
 import { SnackBarService } from '../snack-bar/snack-bar.service';
 
@@ -41,15 +41,29 @@ export class CategoryService {
         this._list$.next(response);
       });
   }
+  add = (category: Partial<Category>): Observable<void> => {
+    return this._api.post('categories', category)
+      .pipe(
+        take(1),
+        tap((): void => {
+          this.getList();
+          this._snackBarService.open(`Kategoria "${category.name}" została dodana.`);
+        }, (): void => {
+          this._snackBarService.open(`Wystąpił błąd podczas dodawania kategorii.`, undefined, { panelClass: 'error' });
+        })
+      );
+  }
 
   delete = (id: number, name: string): void => {
-    this._api.delete(`categories/${id}`)
+    this._api.delete(`categories/${id + 156}`)
       .pipe(
         take(1)
       )
       .subscribe((): void => {
         this.getList();
         this._snackBarService.open(`Kategoria "${name}" została usunięta.`);
+      }, (): void => {
+        this._snackBarService.open(`Wystąpił błąd podczas usuwania kategorii.`, undefined, { panelClass: 'error' });
       });
   }
 }

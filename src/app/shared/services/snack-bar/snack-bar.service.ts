@@ -15,7 +15,7 @@ export class SnackBarService {
     };
   }
 
-  open = (message: string, action: string = 'Zamknij', config: MatSnackBarConfig = this._defaultConfig): void => {
-    this._snackBar.open(message, action, config);
+  open = (message: string, action: string = 'Zamknij', config?: MatSnackBarConfig): void => {
+    this._snackBar.open(message, action, { ...this._defaultConfig, ...config });
   }
 }
