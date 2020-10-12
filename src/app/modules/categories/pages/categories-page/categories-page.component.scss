@@ -15,6 +15,24 @@
       white-space: nowrap;
     }
 
+    .cell-active {
+      display: flex;
+      align-items: center;
+
+      span {
+        display: flex;
+        align-items: center;
+
+        .mat-icon {
+          width: 18px;
+          height: 18px;
+          font-size: 18px;
+          line-height: 18px;
+          margin-right: 2px;
+        }
+      }
+    }
+
     .cell-actions {
       text-align: right;
 

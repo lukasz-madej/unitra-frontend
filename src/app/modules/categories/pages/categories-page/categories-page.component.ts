@@ -34,7 +34,7 @@ export class CategoriesPageComponent implements AfterViewInit {
     private _confirmationDialogService: ConfirmationDialogService,
     private _changeDetectorRef: ChangeDetectorRef
   ) {
-    this.displayedColumns = ['id', 'name', 'description', 'createdAt', 'updatedAt', 'actions'];
+    this.displayedColumns = ['id', 'name', 'description', 'createdAt', 'updatedAt', 'active', 'actions'];
     this.confirmationDialogOptions = {
       title: 'Czy na pewno chcesz usunąć tę kategorię?',
       message: 'Urządzenia przypisane do tej kategorii nie zostaną usunięte.',

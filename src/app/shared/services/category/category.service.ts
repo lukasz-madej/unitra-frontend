@@ -24,12 +24,13 @@ export class CategoryService {
         take(1),
         map((response: any): Category[] =>
           response.map((item: any): Category => {
-            const { id, name, description, created_at, updated_at } = item;
+            const { id, name, description, created_at, updated_at, active } = item;
 
             return {
               id,
               name,
               description,
+              active,
               createdAt: new Date(created_at),
               updatedAt: new Date(updated_at)
             };
