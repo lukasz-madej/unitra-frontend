@@ -3,6 +3,7 @@
     <div class="actions">
       <button mat-raised-button color="primary" (click)="onAddClick()">Dodaj kategorię</button>
     </div>
+    <hr />
     <table mat-table matSort [dataSource]="dataSource">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>

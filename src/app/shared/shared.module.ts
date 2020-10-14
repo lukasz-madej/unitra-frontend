@@ -8,26 +8,54 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { EquipmentSearchComponent } from './components/equipment-search/equipment-search.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
+const MY_FORMATS = {
+  parse: {
+    dateInput: 'YYYY',
+  },
+  display: {
+    dateInput: 'YYYY',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
+  },
+};
 
 @NgModule({
-  declarations: [LoadingComponent, PanelComponent, ConfirmationDialogComponent],
+  declarations: [LoadingComponent, PanelComponent, ConfirmationDialogComponent, EquipmentSearchComponent],
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
     MatCardModule,
     MatDialogModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatAutocompleteModule
   ],
   exports: [
     LoadingComponent,
-    PanelComponent
+    PanelComponent,
+    EquipmentSearchComponent
   ],
   entryComponents: [
     ConfirmationDialogComponent
   ],
   providers: [
-    MatSnackBar
+    MatSnackBar,
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
   ]
 })
 export class SharedModule { }

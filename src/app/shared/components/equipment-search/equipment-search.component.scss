@@ -1,0 +1,22 @@
+#app-equipment-search {
+  .search-form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 10px;
+
+    .mat-form-field-wrapper {
+      padding: 0;
+      margin-bottom: 10px;
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    margin: 5px 0;
+
+    button {
+      margin-left: 10px;
+    }
+  }
+}

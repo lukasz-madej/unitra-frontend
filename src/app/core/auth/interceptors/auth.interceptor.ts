@@ -35,7 +35,6 @@ export class AuthInterceptor implements HttpInterceptor {
       .pipe(
         catchError((error: HttpErrorResponse): Observable<any> => {
           this._errorService.handleAuthError(error);
-          this._authService.logout();
           return throwError(error);
         }),
         finalize((): void => {

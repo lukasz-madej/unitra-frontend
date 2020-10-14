@@ -48,7 +48,7 @@ export class ApiService {
 
   private _showErrorSnackBar = (error: HttpErrorResponse): Observable<any> => {
     if (error.status >= 500) {
-      this._snackBarService.open('Coś poszło nie tak. Sróbuj ponownie później.');
+      this._snackBarService.info('Coś poszło nie tak. Sróbuj ponownie później.');
     }
     return throwError(error);
   }

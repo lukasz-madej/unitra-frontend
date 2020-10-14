@@ -1,0 +1,86 @@
+<div id="app-equipment-search">
+  <form [formGroup]="searchForm">
+    <div class="search-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Nazwa</mat-label>
+        <input matInput placeholder="Nazwa" formControlName="name" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Rok produkcji od</mat-label>
+        <input
+          matInput
+          placeholder="Od"
+          [matDatepicker]="pickerFrom"
+          [min]="minDate"
+          [max]="maxDate"
+          formControlName="productionDateFrom"
+          readonly
+        />
+        <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+        <mat-datepicker
+          [startView]="'multi-year'"
+          (yearSelected)="onYearSelected($event, pickerFrom, 'productionDateFrom')"
+          disabled="false"
+          #pickerFrom
+        ></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Rok produkcji do</mat-label>
+        <input
+          matInput
+          placeholder="Do"
+          [matDatepicker]="pickerTo"
+          [min]="minDate"
+          [max]="maxDate"
+          formControlName="productionDateTo"
+          readonly
+        />
+        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+        <mat-datepicker
+          [startView]="'multi-year'"
+          (yearSelected)="onYearSelected($event, pickerTo, 'productionDateTo')"
+          disabled="false"
+          #pickerTo
+        ></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Numer seryjny</mat-label>
+        <input matInput placeholder="Numer seryjny" formControlName="serialNumber" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Kategoria</mat-label>
+        <input
+          type="text"
+          placeholder="Kategoria"
+          matInput
+          formControlName="category"
+          [matAutocomplete]="category"
+        >
+        <mat-autocomplete #category="matAutocomplete" [displayWith]="categoryDisplay">
+          <mat-option *ngFor="let option of filteredCategories$ | async" [value]="option">
+            {{ option.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Zestaw</mat-label>
+        <input
+          type="text"
+          placeholder="Zestaw"
+          matInput
+          formControlName="set"
+          [matAutocomplete]="set"
+        >
+        <mat-autocomplete #set="matAutocomplete" [displayWith]="setDisplay">
+          <mat-option *ngFor="let option of filteredSets$ | async" [value]="option">
+            {{ option.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div class="actions">
+      <button mat-button (click)="reset()">Wyczyść</button>
+      <button mat-raised-button (click)="submit()">Szukaj</button>
+    </div>
+  </form>
+</div>

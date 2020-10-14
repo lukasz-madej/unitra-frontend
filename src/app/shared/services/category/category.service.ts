@@ -45,6 +45,8 @@ export class CategoryService {
       )
       .subscribe((response: Category[]): void => {
         this._list$.next(response);
+      }, (error: HttpErrorResponse): void => {
+        this._errorService.handleApiError(error, 'Błąd podczas ładowania kategorii.');
       });
   }
 
