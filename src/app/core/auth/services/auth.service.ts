@@ -7,6 +7,7 @@ import { environment } from '../../../../environments/environment';
 import { User } from '../../../shared/models/user.model';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,11 @@ export class AuthService {
     localStorage.setItem(environment.expirationKey, expiresAt);
   }
 
-  constructor(private _api: ApiService, private _router: Router) {
+  constructor(
+    private _api: ApiService,
+    private _router: Router,
+    private _dialog: MatDialog
+  ) {
   }
 
   authenticate = (credentials: Credentials): Observable<User> => {
@@ -62,6 +67,7 @@ export class AuthService {
   logout = (): void => {
     localStorage.removeItem(environment.tokenKey);
     localStorage.removeItem(environment.expirationKey);
+    this._dialog.closeAll();
     this._router.navigateByUrl('/login');
   }
 }

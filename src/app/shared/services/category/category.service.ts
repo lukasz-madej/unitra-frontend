@@ -4,6 +4,8 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { Category } from '../../models/category.model';
 import { SnackBarService } from '../snack-bar/snack-bar.service';
+import { ErrorService } from '../error/error.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,11 @@ export class CategoryService {
     return this._list$;
   }
 
-  constructor(private _api: ApiService, private _snackBarService: SnackBarService) { }
+  constructor(
+    private _api: ApiService,
+    private _snackBarService: SnackBarService,
+    private _errorService: ErrorService
+  ) { }
 
   getList = (): void => {
    this._api.get('categories')
@@ -48,9 +54,9 @@ export class CategoryService {
         take(1),
         tap((): void => {
           this.getList();
-          this._snackBarService.open(`Kategoria "${category.name}" została dodana.`);
-        }, (): void => {
-          this._snackBarService.open(`Wystąpił błąd podczas dodawania kategorii.`, undefined, { panelClass: 'error' });
+          this._snackBarService.info(`Kategoria "${category.name}" została dodana.`);
+        }, (error: HttpErrorResponse): void => {
+          this._errorService.handleApiError(error, 'Wystąpił błąd podczas dodawania kategorii.');
         })
       );
   }
@@ -61,9 +67,9 @@ export class CategoryService {
         take(1),
         tap((): void => {
           this.getList();
-          this._snackBarService.open(`Zmiany w kategorii "${category.name}" zostały zapisane.`);
-        }, (): void => {
-          this._snackBarService.open(`Wystąpił błąd podczas edycji kategorii.`, undefined, { panelClass: 'error' });
+          this._snackBarService.info(`Zmiany w kategorii "${category.name}" zostały zapisane.`);
+        }, (error: HttpErrorResponse): void => {
+          this._errorService.handleApiError(error, 'Wystąpił błąd podczas edycji kategorii.');
         })
       );
   }
@@ -75,9 +81,9 @@ export class CategoryService {
       )
       .subscribe((): void => {
         this.getList();
-        this._snackBarService.open(`Kategoria "${name}" została usunięta.`);
-      }, (): void => {
-        this._snackBarService.open(`Wystąpił błąd podczas usuwania kategorii.`, undefined, { panelClass: 'error' });
+        this._snackBarService.info(`Kategoria "${name}" została usunięta.`);
+      }, (error: HttpErrorResponse): void => {
+        this._errorService.handleApiError(error, 'Wystąpił błąd podczas usuwania kategorii.');
       });
   }
 }

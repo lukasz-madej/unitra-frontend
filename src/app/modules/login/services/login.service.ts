@@ -33,7 +33,7 @@ export class LoginService {
         console.log(response);
         this._navigateToDashboard();
       }, (): void => {
-        this._snackBarService.open('Nieprawidłowy login i / lub hasło.');
+        this._snackBarService.error('Nieprawidłowy login i / lub hasło.');
       });
   }
 

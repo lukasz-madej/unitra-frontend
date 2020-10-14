@@ -4,11 +4,16 @@ import { Observable, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { catchError, finalize } from 'rxjs/operators';
 import { LoadingService } from '../../../shared/services/loading/loading.service';
+import { ErrorService } from '../../../shared/services/error/error.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private _authService: AuthService, private _loadingService: LoadingService) {
+  constructor(
+    private _authService: AuthService,
+    private _loadingService: LoadingService,
+    private _errorService: ErrorService
+  ) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -29,9 +34,8 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request)
       .pipe(
         catchError((error: HttpErrorResponse): Observable<any> => {
-          if (error.status === 401) {
-            this._authService.logout();
-          }
+          this._errorService.handleAuthError(error);
+          this._authService.logout();
           return throwError(error);
         }),
         finalize((): void => {
