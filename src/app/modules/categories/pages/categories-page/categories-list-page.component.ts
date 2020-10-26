@@ -14,11 +14,11 @@ import { EditCategoryComponent } from '../../components/edit-category/edit-categ
 
 @Component({
   selector: 'app-categories-page',
-  templateUrl: './categories-page.component.html',
-  styleUrls: ['./categories-page.component.scss'],
+  templateUrl: './categories-list-page.component.html',
+  styleUrls: ['./categories-list-page.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class CategoriesPageComponent implements AfterViewInit {
+export class CategoriesListPageComponent implements AfterViewInit {
 
   private _unsubscribe$: Subject<boolean> = new Subject<boolean>();
   private _actionItem: Category;

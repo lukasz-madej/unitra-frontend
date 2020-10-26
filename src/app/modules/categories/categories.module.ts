@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoriesPageComponent } from './pages/categories-page/categories-page.component';
+import { CategoriesListPageComponent } from './pages/categories-page/categories-list-page.component';
 import { SharedModule } from '../../shared/shared.module';
 import { CategoriesRoutingModule } from './categories-routing.module';
 import { MatTableModule } from '@angular/material/table';
@@ -19,7 +19,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EditCategoryComponent } from './components/edit-category/edit-category.component';
 
 @NgModule({
-  declarations: [CategoriesPageComponent, AddCategoryComponent, EditCategoryComponent],
+  declarations: [CategoriesListPageComponent, AddCategoryComponent, EditCategoryComponent],
   imports: [
     CommonModule,
     SharedModule,

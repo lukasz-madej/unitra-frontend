@@ -15,11 +15,11 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-equipment-page',
-  templateUrl: './equipment-page.component.html',
-  styleUrls: ['./equipment-page.component.scss'],
+  templateUrl: './equipment-list-page.component.html',
+  styleUrls: ['./equipment-list-page.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class EquipmentPageComponent implements OnInit, AfterViewInit {
+export class EquipmentListPageComponent implements OnInit, AfterViewInit {
 
   private _unsubscribe$: Subject<boolean> = new Subject<boolean>();
   private _actionItem: Equipment;

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EquipmentRoutingModule } from './equipment-routing.module';
-import { EquipmentPageComponent } from './pages/equipment-page/equipment-page.component';
+import { EquipmentListPageComponent } from './pages/equipment-page/equipment-list-page.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSortModule } from '@angular/material/sort';
@@ -12,7 +12,7 @@ import { getPaginatorTranslation } from '../../shared/translations/paginator.tra
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
-  declarations: [EquipmentPageComponent],
+  declarations: [EquipmentListPageComponent],
   imports: [
     CommonModule,
     EquipmentRoutingModule,

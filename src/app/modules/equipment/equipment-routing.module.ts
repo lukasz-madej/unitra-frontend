@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EquipmentPageComponent } from './pages/equipment-page/equipment-page.component';
+import { EquipmentListPageComponent } from './pages/equipment-page/equipment-list-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: EquipmentPageComponent,
+    component: EquipmentListPageComponent,
   },
 ];
 
