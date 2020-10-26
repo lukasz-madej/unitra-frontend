@@ -16,6 +16,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { NullOrEmptyPipe } from './pipes/null-or-empty.pipe';
+import { MatIconModule } from '@angular/material/icon';
 
 const MY_FORMATS = {
   parse: {
@@ -30,7 +32,7 @@ const MY_FORMATS = {
 };
 
 @NgModule({
-  declarations: [LoadingComponent, PanelComponent, ConfirmationDialogComponent, EquipmentSearchComponent],
+  declarations: [LoadingComponent, PanelComponent, ConfirmationDialogComponent, EquipmentSearchComponent, NullOrEmptyPipe],
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
@@ -43,13 +45,15 @@ const MY_FORMATS = {
     MatInputModule,
     MatDatepickerModule,
     MatMomentDateModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatIconModule
   ],
-  exports: [
-    LoadingComponent,
-    PanelComponent,
-    EquipmentSearchComponent
-  ],
+    exports: [
+        LoadingComponent,
+        PanelComponent,
+        EquipmentSearchComponent,
+        NullOrEmptyPipe
+    ],
   entryComponents: [
     ConfirmationDialogComponent
   ],

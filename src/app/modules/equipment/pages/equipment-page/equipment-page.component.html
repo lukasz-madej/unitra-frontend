@@ -4,7 +4,71 @@
       <button mat-raised-button color="primary" (click)="onAddClick()">Dodaj urządzenie</button>
     </div>
     <hr />
-    <app-equipment-search></app-equipment-search>
+    <app-equipment-search (search)="onSearch($event)"></app-equipment-search>
+    <table mat-table matSort [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nazwa. </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Opis. </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="cell-description">
+            {{element.description | nullOrEmpty:'-'}}
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="serialNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Numer seryjny. </th>
+        <td mat-cell *matCellDef="let element"> {{element.serialNumber | nullOrEmpty:'-'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="productionYear">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Rok produkcji. </th>
+        <td mat-cell *matCellDef="let element"> {{element.productionDate | nullOrEmpty:'-'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Kategoria. </th>
+        <td mat-cell *matCellDef="let element"> {{element.category?.name | nullOrEmpty:'-'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="set">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Zestaw. </th>
+        <td mat-cell *matCellDef="let element"> {{element.set?.name | nullOrEmpty:'-'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data utwożenia. </th>
+        <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'d MMMM yyyy, HH:mm:ss' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="updatedAt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data ostatniej modyfikacji. </th>
+        <td mat-cell *matCellDef="let element"> {{element.updatedAt | date: 'd MMMM yyyy, HH:mm:ss' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="header-align-right"> Akcje. </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="cell-actions">
+            <button mat-icon-button>
+              <mat-icon (click)="onDetailsClick(element)" matTooltip="Podgląd">remove_red_eye</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon (click)="onEditClick(element)" matTooltip="Edytuj">edit</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon (click)="onDeleteClick(element)" matTooltip="Usuń" color="warn">delete</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <div *ngIf="noData" class="no-records">
+      Brak wyników
+    </div>
+    <mat-paginator [pageSize]="10" showFirstLastButtons></mat-paginator>
   </app-panel>
 </div>
 

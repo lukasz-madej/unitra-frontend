@@ -11,6 +11,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/auth/interceptors/auth.interceptor';
 import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
+import { ApiInterceptor } from './core/api/interceptors/api.interceptor';
 
 registerLocaleData(localePl);
 
@@ -28,6 +29,7 @@ registerLocaleData(localePl);
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
     { provide: LOCALE_ID, useValue: 'pl-PL' }
   ],
   bootstrap: [AppComponent]

@@ -28,20 +28,7 @@ export class CategoryService {
    this._api.get('categories')
       .pipe(
         take(1),
-        map((response: any): Category[] =>
-          response.map((item: any): Category => {
-            const { id, name, description, created_at, updated_at, active } = item;
-
-            return {
-              id,
-              name,
-              description,
-              active,
-              createdAt: new Date(created_at),
-              updatedAt: new Date(updated_at)
-            };
-          })
-        )
+        map((response: any): Category[] => response.map(this.mapItem))
       )
       .subscribe((response: Category[]): void => {
         this._list$.next(response);
@@ -87,5 +74,18 @@ export class CategoryService {
       }, (error: HttpErrorResponse): void => {
         this._errorService.handleApiError(error, 'Wystąpił błąd podczas usuwania kategorii.');
       });
+  }
+
+  mapItem = (item: any): Category => {
+    const { id, name, description, created_at, updated_at, active } = item;
+
+    return {
+      id,
+      name,
+      description,
+      active,
+      createdAt: new Date(created_at),
+      updatedAt: new Date(updated_at)
+    };
   }
 }

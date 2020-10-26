@@ -1,12 +1,12 @@
-import { Category } from './category.model';
-import { Set } from './set.model';
 import { Moment } from 'moment';
 
 export interface EquipmentSearchCriteria {
-  category: Category;
+  categoryName?: string;
+  categoryId?: number;
   name: string;
   productionDateFrom: Moment;
   productionDateTo: Moment;
   serialNumber: string;
-  set: Set;
+  setName?: string;
+  setId?: number;
 }

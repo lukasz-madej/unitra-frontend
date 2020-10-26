@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { SnackBarService } from '../../../shared/services/snack-bar/snack-bar.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,44 +10,27 @@ export class ApiService {
 
   private readonly _apiUrl: string;
 
-  constructor(private _http: HttpClient, private _snackBarService: SnackBarService) {
+  constructor(
+    private _http: HttpClient
+  ) {
     this._apiUrl = environment.apiUrl;
   }
 
-  get = (endpoint: string): Observable<any> => {
-    return this._http.get(this._getUrl(endpoint))
-      .pipe(
-        catchError(this._showErrorSnackBar)
-      );
-  }
+  get = (endpoint: string, query: any = {}): Observable<any> =>
+    this._http.get(this._getUrl(endpoint), { params: this._parseParams(query) })
 
-  post = (endpoint: string, payload: any): Observable<any> => {
-    return this._http.post(this._getUrl(endpoint), payload)
-      .pipe(
-        catchError(this._showErrorSnackBar)
-      );
-  }
+  post = (endpoint: string, payload: any): Observable<any> =>
+    this._http.post(this._getUrl(endpoint), payload)
 
-  put = (endpoint: string, payload: any): Observable<any> => {
-    return this._http.put(this._getUrl(endpoint), payload)
-      .pipe(
-        catchError(this._showErrorSnackBar)
-      );
-  }
+  put = (endpoint: string, payload: any): Observable<any> =>
+    this._http.put(this._getUrl(endpoint), payload)
 
-  delete = (endpoint: string): Observable<any> => {
-    return this._http.delete(this._getUrl(endpoint))
-      .pipe(
-        catchError(this._showErrorSnackBar)
-      );
-  }
+  delete = (endpoint: string): Observable<any> =>
+    this._http.delete(this._getUrl(endpoint))
 
   private _getUrl = (endpoint: string): string => this._apiUrl + endpoint;
 
-  private _showErrorSnackBar = (error: HttpErrorResponse): Observable<any> => {
-    if (error.status >= 500) {
-      this._snackBarService.info('Coś poszło nie tak. Sróbuj ponownie później.');
-    }
-    return throwError(error);
-  }
+  private _parseParams = (params: any): any =>
+    Object.keys(params).reduce((acc: any, key: string): void =>
+      (params[key] === null ? acc : {...acc, [key]: params[key]}), {})
 }

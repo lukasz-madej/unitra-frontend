@@ -17,6 +17,7 @@
           readonly
         />
         <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+        <mat-icon matSuffix (click)="clearDateFrom()">close</mat-icon>
         <mat-datepicker
           [startView]="'multi-year'"
           (yearSelected)="onYearSelected($event, pickerFrom, 'productionDateFrom')"
@@ -36,6 +37,7 @@
           readonly
         />
         <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+        <mat-icon matSuffix (click)="clearDateTo()">close</mat-icon>
         <mat-datepicker
           [startView]="'multi-year'"
           (yearSelected)="onYearSelected($event, pickerTo, 'productionDateTo')"

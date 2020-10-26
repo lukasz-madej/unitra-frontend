@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { catchError, finalize } from 'rxjs/operators';
-import { LoadingService } from '../../../shared/services/loading/loading.service';
+import { catchError } from 'rxjs/operators';
 import { ErrorService } from '../../../shared/services/error/error.service';
 
 @Injectable()
@@ -11,7 +10,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
     private _authService: AuthService,
-    private _loadingService: LoadingService,
     private _errorService: ErrorService
   ) {
   }
@@ -29,16 +27,11 @@ export class AuthInterceptor implements HttpInterceptor {
 
     request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
 
-    this._loadingService.show();
-
     return next.handle(request)
       .pipe(
         catchError((error: HttpErrorResponse): Observable<any> => {
           this._errorService.handleAuthError(error);
           return throwError(error);
-        }),
-        finalize((): void => {
-          this._loadingService.hide();
         })
       );
   }

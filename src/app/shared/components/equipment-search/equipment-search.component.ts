@@ -42,12 +42,12 @@ export class EquipmentSearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.searchForm = this._formBuilder.group({
-      name: [''],
+      name: [null],
       productionDateFrom: [moment().year(1961)],
       productionDateTo: [moment()],
-      serialNumber: [''],
-      category: [''],
-      set: ['']
+      serialNumber: [null],
+      category: [null],
+      set: [null]
     });
 
     this._categoryService.list$
@@ -91,10 +91,7 @@ export class EquipmentSearchComponent implements OnInit, OnDestroy {
   }
 
   onYearSelected = (normalizedYear: Moment, datePicker: MatDatepicker<any>, formControlName: string): void => {
-    this.searchForm.get(formControlName)
-      .setValue(
-        this.searchForm.get(formControlName).value.year(normalizedYear.year())
-      );
+    this.searchForm.get(formControlName).setValue(normalizedYear);
     datePicker.close();
   }
 
@@ -104,10 +101,20 @@ export class EquipmentSearchComponent implements OnInit, OnDestroy {
 
   reset = (): void => {
     this.searchForm.reset();
+    this.search.emit();
   }
 
   submit = (): void => {
-    this.search.emit(this.searchForm.value);
+    this.search.emit(this._parseSearchParams(this.searchForm.value));
+  }
+
+
+  clearDateFrom = (): void => {
+    this.searchForm.get('productionDateFrom').reset();
+  }
+
+  clearDateTo = (): void => {
+    this.searchForm.get('productionDateTo').reset();
   }
 
   private _filterCategories = (value: any): Category[] => this._filterDropdownOptions(this.categories, value);
@@ -122,5 +129,20 @@ export class EquipmentSearchComponent implements OnInit, OnDestroy {
         );
     }
     return options;
+  }
+
+  private _parseSearchParams = (params: any): EquipmentSearchCriteria => {
+    const { name, productionDateFrom, productionDateTo, serialNumber, category, set } = params;
+
+    return {
+      name,
+      productionDateFrom,
+      productionDateTo,
+      serialNumber,
+      categoryName: category && typeof category === 'string' ? category : null,
+      categoryId: category && category.id ? category.id : null,
+      setName: set && typeof set === 'string' ? set : null,
+      setId: set && set.id ? set.id : null
+    };
   }
 }
