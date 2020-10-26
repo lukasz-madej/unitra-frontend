@@ -9,9 +9,17 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { getPaginatorTranslation } from '../../shared/translations/paginator.translation';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { AddSetComponent } from './components/add-set/add-set.component';
+import { EditSetComponent } from './components/edit-set/edit-set.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [SetsListPageComponent],
+  declarations: [SetsListPageComponent, AddSetComponent, EditSetComponent],
   imports: [
     CommonModule,
     SetsRoutingModule,
@@ -20,7 +28,13 @@ import { getPaginatorTranslation } from '../../shared/translations/paginator.tra
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: getPaginatorTranslation() }

@@ -1,6 +1,6 @@
-<div id="app-edit-category">
-  <form [formGroup]="categoryForm">
-    <h2 mat-dialog-title>Edytuj kategorię <span class="name">{{ data.name }}</span></h2>
+<div id="app-add-set">
+  <form [formGroup]="setForm">
+    <h2 mat-dialog-title>Dodaj zestaw</h2>
     <mat-dialog-content>
       <mat-form-field appearance="outline">
         <mat-label>Nazwa</mat-label>
@@ -12,11 +12,11 @@
         <textarea matInput formControlName="description"></textarea>
         <mat-error *ngIf="description.invalid">To pole jest wymagane!</mat-error>
       </mat-form-field>
-      <mat-checkbox formControlName="active">Aktywna?</mat-checkbox>
+      <mat-checkbox formControlName="active">Aktywny?</mat-checkbox>
     </mat-dialog-content>
     <mat-dialog-actions>
       <button mat-raised-button (click)="onCancel()">Anuluj</button>
-      <button mat-raised-button (click)="onAdd()" color="primary">Zapisz</button>
+      <button mat-raised-button (click)="onAdd()" color="primary">Dodaj</button>
     </mat-dialog-actions>
   </form>
 </div>

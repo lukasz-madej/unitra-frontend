@@ -10,6 +10,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { SetService } from '../../../../shared/services/set/set.service';
 import { take, takeUntil } from 'rxjs/operators';
 import { Category } from '../../../../shared/models/category.model';
+import { AddSetComponent } from '../../components/add-set/add-set.component';
+import { EditSetComponent } from '../../components/edit-set/edit-set.component';
 
 @Component({
   selector: 'app-sets-list-page',
@@ -63,12 +65,12 @@ export class SetsListPageComponent implements AfterViewInit {
   }
 
   onAddClick = (): void => {
-    // this._dialog.open(AddCategoryComponent);
+    this._dialog.open(AddSetComponent);
   }
 
   onEditClick = (event: Set): void => {
     this._actionItem = event;
-    // this._dialog.open(EditCategoryComponent, { data: event });
+    this._dialog.open(EditSetComponent, { data: event });
   }
 
   onDeleteClick = (event: Set): void => {
