@@ -12,6 +12,7 @@ import { take, takeUntil } from 'rxjs/operators';
 import { Category } from '../../../../shared/models/category.model';
 import { AddSetComponent } from '../../components/add-set/add-set.component';
 import { EditSetComponent } from '../../components/edit-set/edit-set.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sets-list-page',
@@ -37,7 +38,8 @@ export class SetsListPageComponent implements AfterViewInit {
     private _setService: SetService,
     private _confirmationDialogService: ConfirmationDialogService,
     private _changeDetectorRef: ChangeDetectorRef,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _router: Router
   ) {
     this.displayedColumns = ['id', 'name', 'description', 'createdAt', 'updatedAt', 'active', 'actions'];
     this.confirmationDialogOptions = {
@@ -89,4 +91,7 @@ export class SetsListPageComponent implements AfterViewInit {
       });
   }
 
+  onDetailsClick = (event: Set): void => {
+    this._router.navigateByUrl(`/private/sets/details/${event.id}`);
+  }
 }
