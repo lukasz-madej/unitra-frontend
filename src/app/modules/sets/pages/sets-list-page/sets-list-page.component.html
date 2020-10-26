@@ -1,0 +1,62 @@
+<div id="app-sets-page">
+  <app-panel header="Lista zestawów">
+    <div class="actions">
+      <button mat-raised-button color="primary" (click)="onAddClick()">Dodaj zestaw</button>
+    </div>
+    <hr />
+    <table mat-table matSort [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nazwa. </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Opis. </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="cell-description">
+            {{element.description | nullOrEmpty:'-'}}
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data utwożenia. </th>
+        <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'d MMMM yyyy, HH:mm:ss' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="updatedAt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data ostatniej modyfikacji. </th>
+        <td mat-cell *matCellDef="let element"> {{element.updatedAt | date: 'd MMMM yyyy, HH:mm:ss' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="active">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Aktywny? </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="cell-active">
+            <span *ngIf="element.active"><mat-icon color="primary">check</mat-icon> Tak</span>
+            <span *ngIf="!element.active"><mat-icon color="warn">close</mat-icon> Nie</span>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="header-align-right"> Akcje. </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="cell-actions">
+            <button mat-icon-button>
+              <mat-icon (click)="onEditClick(element)" matTooltip="Edytuj">edit</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon (click)="onDeleteClick(element)" matTooltip="Usuń" color="warn">delete</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <div *ngIf="noData" class="no-records">
+      Brak wyników
+    </div>
+    <mat-paginator [pageSize]="10" showFirstLastButtons></mat-paginator>
+  </app-panel>
+</div>

@@ -8,7 +8,7 @@
     <hr />
     <li *ngFor="let item of categories">{{ item.name }}</li>
     <hr *ngIf="categories.length" />
-    <li>Zestawy</li>
+    <li routerLink="sets">Zestawy</li>
     <li routerLink="equipment">Urządzenia</li>
     <li routerLink="categories">Kategorie</li>
   </ul>
