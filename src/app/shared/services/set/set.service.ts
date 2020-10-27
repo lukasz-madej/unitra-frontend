@@ -77,13 +77,14 @@ export class SetService {
   }
 
   mapItem = (item: any): Set => {
-    const { id, name, description, created_at, updated_at, active } = item;
+    const { id, name, description, created_at, updated_at, active, membersCount } = item;
 
     return {
       id,
       name,
       description,
       active,
+      membersCount,
       createdAt: new Date(created_at),
       updatedAt: new Date(updated_at)
     };

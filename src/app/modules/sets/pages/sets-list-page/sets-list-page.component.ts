@@ -9,7 +9,6 @@ import { ConfirmationDialogService } from '../../../../shared/services/confirmat
 import { MatDialog } from '@angular/material/dialog';
 import { SetService } from '../../../../shared/services/set/set.service';
 import { take, takeUntil } from 'rxjs/operators';
-import { Category } from '../../../../shared/models/category.model';
 import { AddSetComponent } from '../../components/add-set/add-set.component';
 import { EditSetComponent } from '../../components/edit-set/edit-set.component';
 import { Router } from '@angular/router';
@@ -41,7 +40,7 @@ export class SetsListPageComponent implements AfterViewInit {
     private _dialog: MatDialog,
     private _router: Router
   ) {
-    this.displayedColumns = ['id', 'name', 'description', 'createdAt', 'updatedAt', 'active', 'actions'];
+    this.displayedColumns = ['id', 'name', 'description', 'createdAt', 'updatedAt', 'active', 'membersCount', 'actions'];
     this.confirmationDialogOptions = {
       title: 'Czy na pewno chcesz usunąć ten zestaw?',
       message: 'Urządzenia przypisane do tego zestawu nie zostaną usunięte.',
@@ -58,7 +57,7 @@ export class SetsListPageComponent implements AfterViewInit {
       )
       .subscribe((response: Set[]): void => {
         this.sets = response;
-        this.dataSource = new MatTableDataSource<Category>(this.sets);
+        this.dataSource = new MatTableDataSource<Set>(this.sets);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.noData = this.dataSource.data.length === 0;

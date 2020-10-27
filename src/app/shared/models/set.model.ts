@@ -3,6 +3,7 @@ export interface Set {
   name: string;
   description: string;
   active: boolean;
+  membersCount: number;
   createdAt: Date;
   updatedAt: Date;
 }
