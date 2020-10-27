@@ -22,4 +22,8 @@ export class SnackBarService {
   error = (message: string, config?: MatSnackBar): void => {
     this._snackBar.open(message, null, { ...this._defaultConfig, panelClass: 'error', ...config });
   }
+
+  hideAll = (): void => {
+    this._snackBar.dismiss();
+  }
 }

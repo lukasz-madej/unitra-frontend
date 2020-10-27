@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
 import { ApiService } from '../../api/services/api.service';
 import { environment } from '../../../../environments/environment';
-import { User } from '../../../shared/models/user.model';
+import { User } from '../../user/models/user.model';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';

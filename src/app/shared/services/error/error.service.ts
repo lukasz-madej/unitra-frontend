@@ -16,10 +16,8 @@ export class ErrorService {
     }
   }
 
-  handleAuthError = (error: HttpErrorResponse): void => {
-    if (error.status === 401) {
-      this._authService.logout();
-      this._snackBarService.error('Twoja sesja wygasła. Zaloguj się ponownie.');
-    }
+  handleAuthError = (): void => {
+    this._authService.logout();
+    this._snackBarService.error('Twoja sesja wygasła. Zaloguj się ponownie.');
   }
 }

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Credentials } from '../models/login.model';
-import { LoadingService } from '../../../shared/services/loading/loading.service';
 import { AuthService } from '../../../core/auth/services/auth.service';
-import { finalize, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { User } from '../../../shared/models/user.model';
+import { User } from '../../../core/user/models/user.model';
 import { SnackBarService } from '../../../shared/services/snack-bar/snack-bar.service';
+import { UserService } from '../../../core/user/services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,24 +13,20 @@ import { SnackBarService } from '../../../shared/services/snack-bar/snack-bar.se
 export class LoginService {
 
   constructor(
-    private _loadingService: LoadingService,
     private _authService: AuthService,
     private _router: Router,
-    private _snackBarService: SnackBarService
+    private _snackBarService: SnackBarService,
+    private _userService: UserService
   ) { }
 
   login = (credentials: Credentials): void => {
-    this._loadingService.show();
-
+    this._snackBarService.hideAll();
     this._authService.authenticate(credentials)
       .pipe(
-        take(1),
-        finalize((): void => {
-          this._loadingService.hide();
-        })
+        take(1)
       )
       .subscribe((response: User): void => {
-        console.log(response);
+        this._userService.user = response;
         this._navigateToDashboard();
       }, (): void => {
         this._snackBarService.error('Nieprawidłowy login i / lub hasło.');

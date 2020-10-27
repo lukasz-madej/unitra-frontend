@@ -30,7 +30,9 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request)
       .pipe(
         catchError((error: HttpErrorResponse): Observable<any> => {
-          this._errorService.handleAuthError(error);
+          if (error.status === 401) {
+            this._errorService.handleAuthError();
+          }
           return throwError(error);
         })
       );
