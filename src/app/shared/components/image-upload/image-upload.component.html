@@ -1,0 +1,23 @@
+<div id="app-image-upload">
+  <div class="image-upload">
+    <div class="dropzone" [class.error]="fileError">
+      <ng-container *ngIf="!fileError && !fileUploading">
+        <input
+          type="file"
+          id="file-drop"
+          (change)="onChange($event)"
+        />
+        <mat-icon>upload</mat-icon>
+        <p>Przeciądnij i upuść tutaj, albo</p>
+        <label for="file-drop">Przeglądaj</label>
+      </ng-container>
+      <ng-container *ngIf="fileError">
+        <p>{{ fileError }}</p>
+      </ng-container>
+      <ng-container *ngIf="fileUploading">
+        <p>{{ file.name }}</p>
+        <mat-progress-bar mode="determinate" [value]="fileProgress"></mat-progress-bar>
+      </ng-container>
+    </div>
+  </div>
+</div>

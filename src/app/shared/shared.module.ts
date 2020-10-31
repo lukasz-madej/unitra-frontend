@@ -18,6 +18,8 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NullOrEmptyPipe } from './pipes/null-or-empty.pipe';
 import { MatIconModule } from '@angular/material/icon';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const MY_FORMATS = {
   parse: {
@@ -32,7 +34,7 @@ const MY_FORMATS = {
 };
 
 @NgModule({
-  declarations: [LoadingComponent, PanelComponent, ConfirmationDialogComponent, EquipmentSearchComponent, NullOrEmptyPipe],
+  declarations: [LoadingComponent, PanelComponent, ConfirmationDialogComponent, EquipmentSearchComponent, NullOrEmptyPipe, ImageUploadComponent],
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
@@ -46,13 +48,15 @@ const MY_FORMATS = {
     MatDatepickerModule,
     MatMomentDateModule,
     MatAutocompleteModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressBarModule
   ],
     exports: [
         LoadingComponent,
         PanelComponent,
         EquipmentSearchComponent,
-        NullOrEmptyPipe
+        NullOrEmptyPipe,
+        ImageUploadComponent
     ],
   entryComponents: [
     ConfirmationDialogComponent

@@ -10,9 +10,10 @@ import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginato
 import { MatIconModule } from '@angular/material/icon';
 import { getPaginatorTranslation } from '../../shared/translations/paginator.translation';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { AddEquipmentComponent } from './components/add-equipment/add-equipment.component';
 
 @NgModule({
-  declarations: [EquipmentListPageComponent],
+  declarations: [EquipmentListPageComponent, AddEquipmentComponent],
   imports: [
     CommonModule,
     EquipmentRoutingModule,

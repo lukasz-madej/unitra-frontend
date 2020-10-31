@@ -12,6 +12,8 @@ import { Equipment } from '../../../../shared/models/equipment.model';
 import { EquipmentService } from '../../../../shared/services/equipment/equipment.service';
 import { EquipmentSearchCriteria } from '../../../../shared/models/equipment-search.model';
 import { Router } from '@angular/router';
+import { AddEquipmentComponent } from '../../components/add-equipment/add-equipment.component';
+import { ImageUploadType } from '../../../../shared/models/image-upload.model';
 
 @Component({
   selector: 'app-equipment-page',
@@ -69,7 +71,12 @@ export class EquipmentListPageComponent implements OnInit, AfterViewInit {
   }
 
   onAddClick = (): void => {
-    // this._dialog.open(AddCategoryComponent);
+    this._dialog.open(AddEquipmentComponent, {
+      data: {
+        id: null,
+        type: ImageUploadType.EQUIPMENT
+      }
+    });
   }
 
   onEditClick = (event: Equipment): void => {
