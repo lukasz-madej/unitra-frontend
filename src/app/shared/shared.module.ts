@@ -83,7 +83,8 @@ const MY_FORMATS = {
     ImageListComponent,
     DialogComponent,
     ImageGalleryComponent,
-    YearPickerComponent
+    YearPickerComponent,
+    CategoryAutocompleteComponent
   ],
   entryComponents: [
     ConfirmationDialogComponent

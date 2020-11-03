@@ -23,9 +23,7 @@ export class EquipmentSearchComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;
   minDate: Moment;
   maxDate: Moment;
-  categories: Category[];
   sets: Set[];
-  filteredCategories$: Observable<Category[]>;
   filteredSets$: Observable<Set[]>;
 
   @Output() search: EventEmitter<EquipmentSearchCriteria> = new EventEmitter<EquipmentSearchCriteria>();
@@ -41,30 +39,13 @@ export class EquipmentSearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.searchForm = this._formBuilder.group({
-      name: [null],
+      name: [''],
       productionDateFrom: [this.minDate],
       productionDateTo: [this.maxDate],
-      serialNumber: [null],
-      category: [null],
-      set: [null]
+      serialNumber: [''],
+      category: [''],
+      set: ['']
     });
-
-    this._categoryService.list$
-      .pipe(
-        takeUntil(this._unsubscribe$),
-        map((categories: Category[]): Category[] =>
-          categories.filter((category: Category): boolean => category.active)
-        )
-      )
-      .subscribe((response: Category[]): void => {
-        this.categories = response.sort((a: Category, b: Category): number => a.name.localeCompare(b.name));
-      });
-
-    this.filteredCategories$ = this.searchForm.get('category').valueChanges
-      .pipe(
-        startWith(''),
-        map((value: string): Category[] => this._filterCategories(value))
-      );
 
     this._setService.list$
       .pipe(
@@ -89,8 +70,6 @@ export class EquipmentSearchComponent implements OnInit, OnDestroy {
     this._unsubscribe$.complete();
   }
 
-  categoryDisplay = (category: Category): string => category ? category.name : '';
-
   setDisplay = (set: Set): string => set ? set.name : '';
 
   reset = (): void => {
@@ -101,8 +80,6 @@ export class EquipmentSearchComponent implements OnInit, OnDestroy {
   submit = (): void => {
     this.search.emit(this._parseSearchParams(this.searchForm.value));
   }
-
-  private _filterCategories = (value: any): Category[] => this._filterDropdownOptions(this.categories, value);
 
   private _filterSets = (value: any): Set[] => this._filterDropdownOptions(this.sets, value);
 
@@ -119,13 +96,15 @@ export class EquipmentSearchComponent implements OnInit, OnDestroy {
   private _parseSearchParams = (params: any): EquipmentSearchCriteria => {
     const { name, productionDateFrom, productionDateTo, serialNumber, category, set } = params;
 
+    console.log(params);
+
     return {
       name,
-      productionDateFrom: productionDateFrom.yearPicker,
-      productionDateTo: productionDateTo.yearPicker,
+      productionDateFrom,
+      productionDateTo,
       serialNumber,
-      categoryName: category && typeof category === 'string' ? category : null,
-      categoryId: category && category.id ? category.id : null,
+      categoryName: category && category.autocomplete && typeof category.autocomplete === 'string' ? category.autocomplete : null,
+      categoryId: category && category.autocomplete && category.autocomplete.id ? category.autocomplete.id : null,
       setName: set && typeof set === 'string' ? set : null,
       setId: set && set.id ? set.id : null
     };

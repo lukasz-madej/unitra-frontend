@@ -11,33 +11,26 @@
         [maxDate]="maxDate"
         placeholder="Od"
         label="Rok produkcji od"
-      ></app-year-picker>
+      >
+      </app-year-picker>
       <app-year-picker
         formControlName="productionDateTo"
         [minDate]="minDate"
         [maxDate]="maxDate"
         placeholder="Do"
         label="Rok produkcji do"
-      ></app-year-picker>
+      >
+      </app-year-picker>
       <mat-form-field appearance="outline">
         <mat-label>Numer seryjny</mat-label>
         <input matInput placeholder="Numer seryjny" formControlName="serialNumber" />
       </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Kategoria</mat-label>
-        <input
-          type="text"
-          placeholder="Kategoria"
-          matInput
-          formControlName="category"
-          [matAutocomplete]="category"
-        >
-        <mat-autocomplete #category="matAutocomplete" [displayWith]="categoryDisplay">
-          <mat-option *ngFor="let option of filteredCategories$ | async" [value]="option">
-            {{ option.name }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+      <app-category-autocomplete
+        label="Kategoria"
+        placeholder="Kategoria"
+        formControlName="category"
+      >
+      </app-category-autocomplete>
       <mat-form-field appearance="outline">
         <mat-label>Zestaw</mat-label>
         <input

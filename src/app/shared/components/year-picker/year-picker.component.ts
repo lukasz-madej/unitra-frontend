@@ -34,15 +34,12 @@ export class YearPickerComponent implements OnInit, OnDestroy {
     return this.form.value;
   }
   set value(value: any) {
-    if (value) {
-      this.yearPicker.setValue(value);
-      this.onChange(value);
-      this.onTouched();
-      console.log(this.yearPicker);
-    }
+    this.yearPickerControl.setValue(value);
+    this.onChange(value);
+    this.onTouched();
   }
 
-  get yearPicker(): AbstractControl {
+  get yearPickerControl(): AbstractControl {
     return this.form.get('yearPicker');
   }
 
@@ -53,7 +50,7 @@ export class YearPickerComponent implements OnInit, OnDestroy {
     const validators = this.required ? [Validators.required] : [];
 
     this.form = this._formBuilder.group({
-      yearPicker: ['']
+      yearPicker: ['', validators]
     });
 
     this.form.valueChanges
@@ -99,6 +96,6 @@ export class YearPickerComponent implements OnInit, OnDestroy {
   }
 
   clearDate = (): void => {
-    this.form.reset();
+    this.value = '';
   }
 }
