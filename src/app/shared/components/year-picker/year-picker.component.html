@@ -12,6 +12,7 @@
     />
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-icon matSuffix (click)="clearDate()">close</mat-icon>
+    <mat-error *ngIf="yearPicker.invalid && required">To pole jest wymagane!</mat-error>
     <mat-datepicker
       [startView]="'multi-year'"
       (yearSelected)="onYearSelected($event, picker)"

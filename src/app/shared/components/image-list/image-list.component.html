@@ -10,7 +10,7 @@
       <div class="size">
         ({{ item.size| filesize }})
       </div>
-      <div class="actions">
+      <div class="actions" *ngIf="allowDelete">
         <mat-icon color="warn" matTooltip="Usuń" (click)="onDelete(item)">delete</mat-icon>
       </div>
     </li>

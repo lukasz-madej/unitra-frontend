@@ -1,0 +1,18 @@
+<div id="app-image-gallery">
+  <div class="thumbnail" *ngFor="let item of images; let i = index">
+    <div class="spinner">
+      <mat-spinner [diameter]="25"></mat-spinner>
+    </div>
+    <img
+      [src]="getThumbnailUrl(item)"
+      [alt]="item.name"
+      [fullImage]="{ path: item.location }"
+      [simpleMode]="true"
+      lightbox
+      backgroundOpacity="0.8"
+    />
+    <div class="actions">
+      <mat-icon color="warn" matTooltip="Usuń" (click)="onDelete(item)">delete</mat-icon>
+    </div>
+  </div>
+</div>

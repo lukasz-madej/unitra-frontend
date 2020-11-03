@@ -3,24 +3,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 10px;
-
-    .mat-form-field-wrapper {
-      padding: 0;
-      margin-bottom: 10px;
-
-      .mat-form-field-suffix {
-        display: flex;
-        align-items: center;
-
-        .mat-icon {
-          color: rgba(44, 44, 44, 0.54);
-
-          &:hover {
-            cursor: pointer;
-          }
-        }
-      }
-    }
   }
 
   .actions {

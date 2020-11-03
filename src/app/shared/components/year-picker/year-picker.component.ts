@@ -1,5 +1,5 @@
-import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { Moment } from 'moment';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { Subject } from 'rxjs';
@@ -9,6 +9,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'app-year-picker',
   templateUrl: './year-picker.component.html',
   styleUrls: ['./year-picker.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -27,23 +28,30 @@ export class YearPickerComponent implements OnInit, OnDestroy {
   @Input() placeholder: string;
   @Input() minDate: Moment;
   @Input() maxDate: Moment;
+  @Input() required: boolean;
 
   get value(): any {
     return this.form.value;
   }
-
   set value(value: any) {
     if (value) {
-      this.form.setValue(value);
+      this.yearPicker.setValue(value);
       this.onChange(value);
       this.onTouched();
+      console.log(this.yearPicker);
     }
+  }
+
+  get yearPicker(): AbstractControl {
+    return this.form.get('yearPicker');
   }
 
   constructor(private _formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
+    const validators = this.required ? [Validators.required] : [];
+
     this.form = this._formBuilder.group({
       yearPicker: ['']
     });
@@ -86,7 +94,7 @@ export class YearPickerComponent implements OnInit, OnDestroy {
   }
 
   onYearSelected = (normalizedYear: Moment, datePicker: MatDatepicker<any>): void => {
-    this.value = { yearPicker: normalizedYear };
+    this.value = normalizedYear;
     datePicker.close();
   }
 

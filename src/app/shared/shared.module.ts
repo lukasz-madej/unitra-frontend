@@ -24,6 +24,10 @@ import { ImageListComponent } from './components/image-list/image-list.component
 import { NgxFilesizeModule } from 'ngx-filesize';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { ImageGalleryComponent } from './components/image-gallery/image-gallery.component';
+import { CrystalLightboxModule } from '@crystalui/angular-lightbox';
+import { YearPickerComponent } from './components/year-picker/year-picker.component';
+import { CategoryAutocompleteComponent } from './components/category-autocomplete/category-autocomplete.component';
 
 const MY_FORMATS = {
   parse: {
@@ -46,7 +50,10 @@ const MY_FORMATS = {
     NullOrEmptyPipe,
     ImageUploadComponent,
     ImageListComponent,
-    DialogComponent
+    DialogComponent,
+    ImageGalleryComponent,
+    YearPickerComponent,
+    CategoryAutocompleteComponent
   ],
   imports: [
     CommonModule,
@@ -64,7 +71,8 @@ const MY_FORMATS = {
     MatIconModule,
     MatProgressBarModule,
     NgxFilesizeModule,
-    MatTooltipModule
+    MatTooltipModule,
+    CrystalLightboxModule
   ],
   exports: [
     LoadingComponent,
@@ -73,7 +81,9 @@ const MY_FORMATS = {
     NullOrEmptyPipe,
     ImageUploadComponent,
     ImageListComponent,
-    DialogComponent
+    DialogComponent,
+    ImageGalleryComponent,
+    YearPickerComponent
   ],
   entryComponents: [
     ConfirmationDialogComponent

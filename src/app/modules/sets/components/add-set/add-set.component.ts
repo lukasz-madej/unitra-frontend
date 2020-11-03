@@ -21,7 +21,7 @@ export class AddSetComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private _mdDialogRef: MatDialogRef<AddSetComponent>,
+    private _matDialogRef: MatDialogRef<AddSetComponent>,
     private _setService: SetService
   ) { }
 
@@ -47,6 +47,6 @@ export class AddSetComponent implements OnInit {
   }
 
   private _close = (): void => {
-    this._mdDialogRef.close();
+    this._matDialogRef.close();
   }
 }

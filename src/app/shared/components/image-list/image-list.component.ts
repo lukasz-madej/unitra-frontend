@@ -9,6 +9,7 @@ import { Image } from '../../models/image.model';
 export class ImageListComponent {
 
   @Input() images: Image[];
+  @Input() allowDelete: boolean;
 
   @Output() delete: EventEmitter<Image> = new EventEmitter<Image>();
 

@@ -11,6 +11,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { getPaginatorTranslation } from '../../shared/translations/paginator.translation';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AddEquipmentComponent } from './components/add-equipment/add-equipment.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [EquipmentListPageComponent, AddEquipmentComponent],
@@ -23,7 +27,11 @@ import { AddEquipmentComponent } from './components/add-equipment/add-equipment.
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: getPaginatorTranslation() }

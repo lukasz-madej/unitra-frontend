@@ -2,7 +2,6 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewEncapsulation }
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { Moment } from 'moment';
-import { MatDatepicker } from '@angular/material/datepicker';
 import { CategoryService } from '../../services/category/category.service';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 import { Category } from '../../models/category.model';
@@ -43,12 +42,8 @@ export class EquipmentSearchComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.searchForm = this._formBuilder.group({
       name: [null],
-      productionDateFrom: {
-        yearPicker: moment().year(1961)
-      },
-      productionDateTo: {
-        yearPicker: moment()
-      },
+      productionDateFrom: [this.minDate],
+      productionDateTo: [this.maxDate],
       serialNumber: [null],
       category: [null],
       set: [null]
