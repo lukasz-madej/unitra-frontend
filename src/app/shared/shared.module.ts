@@ -5,7 +5,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PanelComponent } from './components/panel/panel.component';
 import { MatCardModule } from '@angular/material/card';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { EquipmentSearchComponent } from './components/equipment-search/equipment-search.component';
@@ -23,6 +23,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ImageListComponent } from './components/image-list/image-list.component';
 import { NgxFilesizeModule } from 'ngx-filesize';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 const MY_FORMATS = {
   parse: {
@@ -44,7 +45,8 @@ const MY_FORMATS = {
     EquipmentSearchComponent,
     NullOrEmptyPipe,
     ImageUploadComponent,
-    ImageListComponent
+    ImageListComponent,
+    DialogComponent
   ],
   imports: [
     CommonModule,
@@ -70,14 +72,16 @@ const MY_FORMATS = {
     EquipmentSearchComponent,
     NullOrEmptyPipe,
     ImageUploadComponent,
-    ImageListComponent
+    ImageListComponent,
+    DialogComponent
   ],
   entryComponents: [
     ConfirmationDialogComponent
   ],
   providers: [
     MatSnackBar,
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { disableClose: true, hasBackdrop: true } }
   ]
 })
 export class SharedModule { }

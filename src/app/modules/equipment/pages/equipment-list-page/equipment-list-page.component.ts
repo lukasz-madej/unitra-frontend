@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmationDialog } from '../../../../shared/models/confirmation-dialog.model';
@@ -21,7 +21,7 @@ import { ImageType } from '../../../../shared/models/image.model';
   styleUrls: ['./equipment-list-page.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class EquipmentListPageComponent implements OnInit, AfterViewInit {
+export class EquipmentListPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private _unsubscribe$: Subject<boolean> = new Subject<boolean>();
   private _actionItem: Equipment;
@@ -53,6 +53,11 @@ export class EquipmentListPageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this._equipmentService.getList();
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribe$.next(true);
+    this._unsubscribe$.complete();
   }
 
   ngAfterViewInit(): void {

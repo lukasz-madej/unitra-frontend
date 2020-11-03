@@ -6,6 +6,7 @@ import { Category } from '../../models/category.model';
 import { SnackBarService } from '../snack-bar/snack-bar.service';
 import { ErrorService } from '../error/error.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { InterceptorMetadata } from '../../models/interceptor-http-params.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +38,8 @@ export class CategoryService {
       });
   }
 
-  add = (category: Partial<Category>): Observable<void> => {
-    return this._api.post('categories', category)
+  add = (category: Partial<Category>, interceptorMetadata: InterceptorMetadata): Observable<void> => {
+    return this._api.post('categories', category, {}, interceptorMetadata)
       .pipe(
         take(1),
         tap((): void => {
@@ -50,8 +51,8 @@ export class CategoryService {
       );
   }
 
-  edit = (id: number, category: Partial<Category>): Observable<void> => {
-    return this._api.put(`categories/${id}`, category)
+  edit = (id: number, category: Partial<Category>, interceptorMetadata: InterceptorMetadata): Observable<void> => {
+    return this._api.put(`categories/${id}`, category, {}, interceptorMetadata)
       .pipe(
         take(1),
         tap((): void => {

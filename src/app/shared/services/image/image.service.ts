@@ -5,6 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { HttpErrorResponse, HttpEvent, HttpEventType } from '@angular/common/http';
 import { ErrorService } from '../error/error.service';
 import { Image, ImageUploadStatus } from '../../models/image.model';
+import { InterceptorMetadata } from '../../models/interceptor-http-params.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,11 @@ export class ImageService {
 
   constructor(private _apiService: ApiService, private _errorService: ErrorService) { }
 
-  upload = (formData: FormData): Observable<any> =>
+  upload = (formData: FormData, interceptorMetadata: InterceptorMetadata): Observable<any> =>
     this._apiService.post('images/upload', formData, {
       reportProgress: true,
       observe: 'events'
-    })
+    }, interceptorMetadata)
       .pipe(
         map((event: HttpEvent<any>): any => {
           switch (event.type) {
@@ -37,8 +38,8 @@ export class ImageService {
         })
       )
 
-  remove = (id: number): Observable<any> =>
-    this._apiService.delete(`images/${id}`)
+  remove = (id: number, interceptorMetadata: InterceptorMetadata): Observable<any> =>
+    this._apiService.delete(`images/${id}`, {}, interceptorMetadata)
       .pipe(
         tap({
           error: (error: HttpErrorResponse): void => {

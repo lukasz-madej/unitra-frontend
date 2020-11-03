@@ -6,6 +6,7 @@ import { ErrorService } from '../error/error.service';
 import { map, take, tap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SnackBarService } from '../snack-bar/snack-bar.service';
+import { InterceptorMetadata } from '../../models/interceptor-http-params.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +38,8 @@ export class SetService {
       });
   }
 
-  add = (set: Partial<Set>): Observable<void> => {
-    return this._api.post('sets', set)
+  add = (set: Partial<Set>, interceptorMetadata: InterceptorMetadata): Observable<void> => {
+    return this._api.post('sets', set, {}, interceptorMetadata)
       .pipe(
         take(1),
         tap((): void => {
@@ -50,8 +51,8 @@ export class SetService {
       );
   }
 
-  edit = (id: number, set: Partial<Set>): Observable<void> => {
-    return this._api.put(`sets/${id}`, set)
+  edit = (id: number, set: Partial<Set>, interceptorMetadata: InterceptorMetadata): Observable<void> => {
+    return this._api.put(`sets/${id}`, set, {}, interceptorMetadata)
       .pipe(
         take(1),
         tap((): void => {

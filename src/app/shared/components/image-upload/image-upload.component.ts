@@ -36,7 +36,7 @@ export class ImageUploadComponent implements OnDestroy {
     return this._fileError;
   }
 
-  constructor(private _imageUploadService: ImageService) {
+  constructor(private _imageService: ImageService) {
     this._acceptedFileTypes = [
       'image/png',
       'image/jpeg',
@@ -87,7 +87,7 @@ export class ImageUploadComponent implements OnDestroy {
     this.fileUploading = true;
     this.fileProgress = 0;
 
-    this._imageUploadService.upload(formData)
+    this._imageService.upload(formData, { disableLoadingIndicator: true })
       .pipe(
         takeUntil(this._unsubscribe$),
         finalize((): void => {

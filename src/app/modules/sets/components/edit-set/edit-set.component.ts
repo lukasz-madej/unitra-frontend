@@ -37,7 +37,7 @@ export class EditSetComponent implements OnInit {
 
   onAdd = (): void => {
     if (this.setForm.valid) {
-      this._setService.edit(this.data.id, this.setForm.value)
+      this._setService.edit(this.data.id, this.setForm.value, { modal: true })
         .subscribe((): void => {
           this._close();
         });

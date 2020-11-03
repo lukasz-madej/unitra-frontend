@@ -37,7 +37,7 @@ export class EditCategoryComponent implements OnInit {
 
   onAdd = (): void => {
     if (this.categoryForm.valid) {
-      this._categoryService.edit(this.data.id, this.categoryForm.value)
+      this._categoryService.edit(this.data.id, this.categoryForm.value, { modal: true })
         .subscribe((): void => {
           this._close();
         });

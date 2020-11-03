@@ -1,4 +1,6 @@
 <div id="app-add-equipment">
-  <app-image-upload [id]="id" [type]="type" (upload)="onUpload($event)"></app-image-upload>
-  <app-image-list [images]="images" (delete)="onDelete($event)"></app-image-list>
+  <app-dialog>
+    <app-image-upload [id]="id" [type]="type" (upload)="onUpload($event)"></app-image-upload>
+    <app-image-list [images]="images" [modal]="true" (delete)="onDelete($event)"></app-image-list>
+  </app-dialog>
 </div>

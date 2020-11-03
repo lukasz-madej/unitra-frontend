@@ -1,14 +1,14 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { LoadingService } from './shared/services/loading/loading.service';
 import { Subject } from 'rxjs';
+import { LoadingService } from '../../services/loading/loading.service';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-dialog',
+  templateUrl: './dialog.component.html',
+  styleUrls: ['./dialog.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class DialogComponent implements OnInit, OnDestroy {
 
   private _unsubscribe$: Subject<boolean> = new Subject<boolean>();
 
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._loadingService.loading$
+    this._loadingService.loadingModal$
       .pipe(
         takeUntil(this._unsubscribe$)
       )

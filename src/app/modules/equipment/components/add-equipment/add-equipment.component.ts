@@ -26,7 +26,7 @@ export class AddEquipmentComponent {
   }
 
   onDelete = (event: Image): void => {
-    this._imageService.remove(event.id)
+    this._imageService.remove(event.id, { modal: true })
       .pipe(
         take(1)
       )

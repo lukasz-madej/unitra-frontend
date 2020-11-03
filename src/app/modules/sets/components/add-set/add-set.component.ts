@@ -35,7 +35,7 @@ export class AddSetComponent implements OnInit {
 
   onAdd = (): void => {
     if (this.setForm.valid) {
-      this._setService.add(this.setForm.value)
+      this._setService.add(this.setForm.value, { modal: true })
         .subscribe((): void => {
           this._close();
         });

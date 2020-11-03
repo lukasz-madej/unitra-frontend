@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Set } from '../../../../shared/models/set.model';
 import { MatTableDataSource } from '@angular/material/table';
@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./sets-list-page.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SetsListPageComponent implements AfterViewInit {
+export class SetsListPageComponent implements AfterViewInit, OnDestroy {
 
   private _unsubscribe$: Subject<boolean> = new Subject<boolean>();
   private _actionItem: Set;
@@ -48,6 +48,11 @@ export class SetsListPageComponent implements AfterViewInit {
       confirmText: 'Usuń',
       confirmButtonColor: 'warn'
     };
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribe$.next(true);
+    this._unsubscribe$.complete();
   }
 
   ngAfterViewInit(): void {

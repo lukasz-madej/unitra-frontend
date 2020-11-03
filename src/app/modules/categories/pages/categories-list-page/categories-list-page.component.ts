@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CategoryService } from '../../../../shared/services/category/category.service';
 import { Category } from '../../../../shared/models/category.model';
 import { take, takeUntil } from 'rxjs/operators';
@@ -18,7 +18,7 @@ import { EditCategoryComponent } from '../../components/edit-category/edit-categ
   styleUrls: ['./categories-list-page.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class CategoriesListPageComponent implements AfterViewInit {
+export class CategoriesListPageComponent implements AfterViewInit, OnDestroy {
 
   private _unsubscribe$: Subject<boolean> = new Subject<boolean>();
   private _actionItem: Category;
@@ -46,6 +46,11 @@ export class CategoriesListPageComponent implements AfterViewInit {
       confirmText: 'Usuń',
       confirmButtonColor: 'warn'
     };
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribe$.next(true);
+    this._unsubscribe$.complete();
   }
 
   ngAfterViewInit(): void {

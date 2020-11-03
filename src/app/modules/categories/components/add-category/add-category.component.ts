@@ -35,7 +35,7 @@ export class AddCategoryComponent implements OnInit {
 
   onAdd = (): void => {
     if (this.categoryForm.valid) {
-      this._categoryService.add(this.categoryForm.value)
+      this._categoryService.add(this.categoryForm.value, { modal: true })
         .subscribe((): void => {
           this._close();
         });

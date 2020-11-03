@@ -1,22 +1,24 @@
 <div id="app-add-set">
-  <form [formGroup]="setForm">
-    <h2 mat-dialog-title>Dodaj zestaw</h2>
-    <mat-dialog-content>
-      <mat-form-field appearance="outline">
-        <mat-label>Nazwa</mat-label>
-        <input matInput placeholder="Nazwa" formControlName="name" />
-        <mat-error *ngIf="name.invalid">To pole jest wymagane!</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Opis</mat-label>
-        <textarea matInput formControlName="description"></textarea>
-        <mat-error *ngIf="description.invalid">To pole jest wymagane!</mat-error>
-      </mat-form-field>
-      <mat-checkbox formControlName="active">Aktywny?</mat-checkbox>
-    </mat-dialog-content>
-    <mat-dialog-actions>
-      <button mat-raised-button (click)="onCancel()">Anuluj</button>
-      <button mat-raised-button (click)="onAdd()" color="primary">Dodaj</button>
-    </mat-dialog-actions>
-  </form>
+  <app-dialog>
+    <form [formGroup]="setForm">
+      <h2 mat-dialog-title>Dodaj zestaw</h2>
+      <mat-dialog-content>
+        <mat-form-field appearance="outline">
+          <mat-label>Nazwa</mat-label>
+          <input matInput placeholder="Nazwa" formControlName="name" />
+          <mat-error *ngIf="name.invalid">To pole jest wymagane!</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Opis</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+          <mat-error *ngIf="description.invalid">To pole jest wymagane!</mat-error>
+        </mat-form-field>
+        <mat-checkbox formControlName="active">Aktywny?</mat-checkbox>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-raised-button (click)="onCancel()">Anuluj</button>
+        <button mat-raised-button (click)="onAdd()" color="primary">Dodaj</button>
+      </mat-dialog-actions>
+    </form>
+  </app-dialog>
 </div>
