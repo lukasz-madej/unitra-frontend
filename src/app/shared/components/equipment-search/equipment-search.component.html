@@ -25,27 +25,20 @@
         <mat-label>Numer seryjny</mat-label>
         <input matInput placeholder="Numer seryjny" formControlName="serialNumber" />
       </mat-form-field>
-      <app-category-autocomplete
+      <app-category-selector
         label="Kategoria"
         placeholder="Kategoria"
         formControlName="category"
+        [autocomplete]="true"
       >
-      </app-category-autocomplete>
-      <mat-form-field appearance="outline">
-        <mat-label>Zestaw</mat-label>
-        <input
-          type="text"
-          placeholder="Zestaw"
-          matInput
-          formControlName="set"
-          [matAutocomplete]="set"
-        >
-        <mat-autocomplete #set="matAutocomplete" [displayWith]="setDisplay">
-          <mat-option *ngFor="let option of filteredSets$ | async" [value]="option">
-            {{ option.name }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+      </app-category-selector>
+      <app-set-selector
+        label="Zestaw"
+        placeholder="Zestaw"
+        formControlName="set"
+        [autocomplete]="true"
+      >
+      </app-set-selector>
     </div>
     <div class="actions">
       <button mat-button (click)="reset()">Wyczyść</button>

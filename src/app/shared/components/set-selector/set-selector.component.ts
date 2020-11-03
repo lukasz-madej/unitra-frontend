@@ -1,54 +1,55 @@
 import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { Category } from '../../models/category.model';
-import { Observable, Subject } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
-import { CategoryService } from '../../services/category/category.service';
 import { AbstractControl, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { Observable, Subject } from 'rxjs';
+import { Set } from '../../models/set.model';
+import { SetService } from '../../services/set/set.service';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-category-autocomplete',
-  templateUrl: './category-autocomplete.component.html',
-  styleUrls: ['./category-autocomplete.component.scss'],
+  selector: 'app-set-selector',
+  templateUrl: './set-selector.component.html',
+  styleUrls: ['./set-selector.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CategoryAutocompleteComponent),
+      useExisting: forwardRef(() => SetSelectorComponent),
       multi: true
     }
   ]
 })
-export class CategoryAutocompleteComponent implements OnInit, OnDestroy {
+export class SetSelectorComponent implements OnInit, OnDestroy {
 
   private _unsubscribe$: Subject<boolean> = new Subject<boolean>();
 
-  categories: Category[];
-  filteredCategories$: Observable<Category[]>;
+  sets: Set[];
+  filteredSets$: Observable<Set[]>;
   form: FormGroup;
 
   @Input() label: string;
   @Input() placeholder: string;
   @Input() required: boolean;
+  @Input() autocomplete: boolean;
 
   get value(): any {
     return this.form.value;
   }
   set value(value: any) {
-    this.categoryControl.setValue(value);
+    this.setControl.setValue(value);
     this.onChange(value);
     this.onTouched();
   }
 
-  get categoryControl(): AbstractControl {
-    return this.form.get('autocomplete');
+  get setControl(): AbstractControl {
+    return this.form.get('selector');
   }
 
-  constructor(private _categoryService: CategoryService, private _formBuilder: FormBuilder) { }
+  constructor(private _setService: SetService, private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     const validators = this.required ? [Validators.required] : [];
 
     this.form = this._formBuilder.group({
-      autocomplete: ['', validators]
+      selector: ['', validators]
     });
 
     this.form.valueChanges
@@ -60,19 +61,19 @@ export class CategoryAutocompleteComponent implements OnInit, OnDestroy {
         this.onTouched();
       });
 
-    this._categoryService.list$
+    this._setService.list$
       .pipe(
         takeUntil(this._unsubscribe$),
-        map((categories: Category[]): Category[] =>
-          categories.filter((category: Category): boolean => category.active)
+        map((sets: Set[]): Set[] =>
+          sets.filter((set: Set): boolean => set.active)
         )
       )
-      .subscribe((response: Category[]): void => {
-        this.categories = response.sort((a: Category, b: Category): number => a.name.localeCompare(b.name));
-        this.filteredCategories$ = this.categoryControl.valueChanges
+      .subscribe((response: Set[]): void => {
+        this.sets = response.sort((a: Set, b: Set): number => a.name.localeCompare(b.name));
+        this.filteredSets$ = this.setControl.valueChanges
           .pipe(
             startWith(''),
-            map((value: string): Category[] => this._filterCategories(value))
+            map((value: string): Set[] => this._filterSets(value))
           );
       });
   }
@@ -104,15 +105,15 @@ export class CategoryAutocompleteComponent implements OnInit, OnDestroy {
     }
   }
 
-  categoryDisplay = (category: Category): string => category ? category.name : '';
+  setDisplay = (set: Set): string => set ? set.name : '';
 
-  private _filterCategories = (value: any): Category[] => {
+  private _filterSets = (value: any): Set[] => {
     if (value) {
-      return this.categories
-        .filter((category: Category): boolean => category.name.toLowerCase()
+      return this.sets
+        .filter((set: Set): boolean => set.name.toLowerCase()
           .includes(value.name ? value.name.toLowerCase() : value.toLowerCase())
         );
     }
-    return this.categories;
+    return this.sets;
   }
 }

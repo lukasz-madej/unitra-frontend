@@ -1,0 +1,30 @@
+<div class="app-set-selector" [formGroup]="form">
+  <ng-container *ngIf="autocomplete">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ label }}</mat-label>
+      <input
+        type="text"
+        [placeholder]="placeholder"
+        matInput
+        formControlName="selector"
+        [matAutocomplete]="set"
+      >
+      <mat-error *ngIf="setControl.invalid && required">To pole jest wymagane!</mat-error>
+      <mat-autocomplete #set="matAutocomplete" [displayWith]="setDisplay">
+        <mat-option *ngFor="let option of filteredSets$ | async" [value]="option">
+          {{ option.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </ng-container>
+  <ng-container *ngIf="!autocomplete">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ label }}</mat-label>
+      <mat-select formControlName="selector">
+        <mat-option>Brak</mat-option>
+        <mat-option *ngFor="let option of sets" [value]="option">{{ option.name }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="setControl.invalid && required">To pole jest wymagane!</mat-error>
+    </mat-form-field>
+  </ng-container>
+</div>

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CategoryAutocompleteComponent } from './category-autocomplete.component';
+import { CategorySelectorComponent } from './category-selector.component';
 
 describe('CategoryAutocompleteComponent', () => {
-  let component: CategoryAutocompleteComponent;
-  let fixture: ComponentFixture<CategoryAutocompleteComponent>;
+  let component: CategorySelectorComponent;
+  let fixture: ComponentFixture<CategorySelectorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CategoryAutocompleteComponent ]
+      declarations: [ CategorySelectorComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CategoryAutocompleteComponent);
+    fixture = TestBed.createComponent(CategorySelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
