@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Moment } from 'moment';
 import * as moment from 'moment';
+import { EquipmentService } from '../../../../shared/services/equipment/equipment.service';
 
 @Component({
   selector: 'app-add-equipment',
@@ -25,6 +26,7 @@ export class AddEquipmentComponent implements OnInit {
     private _imageService: ImageService,
     private _matDialogRef: MatDialogRef<AddEquipmentComponent>,
     private _formBuilder: FormBuilder,
+    private _equipmentService: EquipmentService,
     @Inject(MAT_DIALOG_DATA) data
   ) {
     this.id = data.id;
@@ -64,7 +66,10 @@ export class AddEquipmentComponent implements OnInit {
 
   onAdd = (): void => {
     if (this.equipmentForm.valid) {
-      console.log(this._preparePayload(this.equipmentForm.value, this.images));
+      this._equipmentService.add(this._preparePayload(this.equipmentForm.value, this.images))
+        .subscribe((): void => {
+          this._close();
+        });
     }
   }
 
