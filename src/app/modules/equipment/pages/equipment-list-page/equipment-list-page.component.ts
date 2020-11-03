@@ -13,7 +13,7 @@ import { EquipmentService } from '../../../../shared/services/equipment/equipmen
 import { EquipmentSearchCriteria } from '../../../../shared/models/equipment-search.model';
 import { Router } from '@angular/router';
 import { AddEquipmentComponent } from '../../components/add-equipment/add-equipment.component';
-import { ImageUploadType } from '../../../../shared/models/image-upload.model';
+import { ImageType } from '../../../../shared/models/image.model';
 
 @Component({
   selector: 'app-equipment-page',
@@ -74,7 +74,7 @@ export class EquipmentListPageComponent implements OnInit, AfterViewInit {
     this._dialog.open(AddEquipmentComponent, {
       data: {
         id: null,
-        type: ImageUploadType.EQUIPMENT
+        type: ImageType.EQUIPMENT
       }
     });
   }

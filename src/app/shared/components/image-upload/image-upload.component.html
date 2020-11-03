@@ -15,8 +15,9 @@
         <p>{{ fileError }}</p>
       </ng-container>
       <ng-container *ngIf="fileUploading">
-        <p>{{ file.name }}</p>
+        <p class="file-name">{{ file.name }}</p>
         <mat-progress-bar mode="determinate" [value]="fileProgress"></mat-progress-bar>
+        <span *ngIf="fileProgress >= 100" class="processing">Przetwarzanie</span>
       </ng-container>
     </div>
   </div>

@@ -20,6 +20,9 @@ import { NullOrEmptyPipe } from './pipes/null-or-empty.pipe';
 import { MatIconModule } from '@angular/material/icon';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ImageListComponent } from './components/image-list/image-list.component';
+import { NgxFilesizeModule } from 'ngx-filesize';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const MY_FORMATS = {
   parse: {
@@ -34,7 +37,15 @@ const MY_FORMATS = {
 };
 
 @NgModule({
-  declarations: [LoadingComponent, PanelComponent, ConfirmationDialogComponent, EquipmentSearchComponent, NullOrEmptyPipe, ImageUploadComponent],
+  declarations: [
+    LoadingComponent,
+    PanelComponent,
+    ConfirmationDialogComponent,
+    EquipmentSearchComponent,
+    NullOrEmptyPipe,
+    ImageUploadComponent,
+    ImageListComponent
+  ],
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
@@ -49,15 +60,18 @@ const MY_FORMATS = {
     MatMomentDateModule,
     MatAutocompleteModule,
     MatIconModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    NgxFilesizeModule,
+    MatTooltipModule
   ],
-    exports: [
-        LoadingComponent,
-        PanelComponent,
-        EquipmentSearchComponent,
-        NullOrEmptyPipe,
-        ImageUploadComponent
-    ],
+  exports: [
+    LoadingComponent,
+    PanelComponent,
+    EquipmentSearchComponent,
+    NullOrEmptyPipe,
+    ImageUploadComponent,
+    ImageListComponent
+  ],
   entryComponents: [
     ConfirmationDialogComponent
   ],

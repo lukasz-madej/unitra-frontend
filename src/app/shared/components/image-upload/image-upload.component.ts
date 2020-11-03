@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
-import { ImageUploadStatus, ImageUploadType } from '../../models/image-upload.model';
-import { ImageUploadService } from '../../services/image-upload/image-upload.service';
+import { ImageUploadStatus, ImageType, Image } from '../../models/image.model';
+import { ImageService } from '../../services/image/image.service';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -21,9 +21,9 @@ export class ImageUploadComponent implements OnDestroy {
   fileProgress: number;
 
   @Input() id: number;
-  @Input() type: ImageUploadType;
+  @Input() type: ImageType;
 
-  @Output() uploadComplete: EventEmitter<File> = new EventEmitter<File>();
+  @Output() upload: EventEmitter<Image> = new EventEmitter<Image>();
 
   set fileError(text: string) {
     this._fileError = text;
@@ -36,7 +36,7 @@ export class ImageUploadComponent implements OnDestroy {
     return this._fileError;
   }
 
-  constructor(private _imageUploadService: ImageUploadService) {
+  constructor(private _imageUploadService: ImageService) {
     this._acceptedFileTypes = [
       'image/png',
       'image/jpeg',
@@ -77,7 +77,10 @@ export class ImageUploadComponent implements OnDestroy {
   private _uploadImage = (): void => {
     const formData = new FormData();
 
-    formData.append('id', this.id ? this.id.toString() : null);
+    if (this.id) {
+      formData.append('id', this.id.toString());
+    }
+
     formData.append('type', this.type);
     formData.append('file', this.file);
 
@@ -98,7 +101,7 @@ export class ImageUploadComponent implements OnDestroy {
             this.fileProgress = response.message;
             break;
           case ImageUploadStatus.COMPLETE:
-            this.uploadComplete.emit(this.file);
+            this.upload.emit(response.message);
             break;
         }
       });

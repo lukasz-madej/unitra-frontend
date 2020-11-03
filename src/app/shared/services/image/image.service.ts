@@ -4,22 +4,19 @@ import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { HttpErrorResponse, HttpEvent, HttpEventType } from '@angular/common/http';
 import { ErrorService } from '../error/error.service';
-import { ImageUploadStatus } from '../../models/image-upload.model';
+import { Image, ImageUploadStatus } from '../../models/image.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ImageUploadService {
+export class ImageService {
 
   constructor(private _apiService: ApiService, private _errorService: ErrorService) { }
 
   upload = (formData: FormData): Observable<any> =>
     this._apiService.post('images/upload', formData, {
       reportProgress: true,
-      observe: 'events',
-      headers: {
-        'Content-Type': 'multipart/data-form'
-      }
+      observe: 'events'
     })
       .pipe(
         map((event: HttpEvent<any>): any => {
@@ -28,7 +25,7 @@ export class ImageUploadService {
               const progress = Math.round(100 * event.loaded / event.total);
               return { status: ImageUploadStatus.PROGRESS, message: progress };
             case HttpEventType.Response:
-              return { status: ImageUploadStatus.COMPLETE, message: event.body};
+              return { status: ImageUploadStatus.COMPLETE, message: this._parseImage(event.body)};
             default:
               return {};
           }
@@ -39,4 +36,36 @@ export class ImageUploadService {
           }
         })
       )
+
+  remove = (id: number): Observable<any> =>
+    this._apiService.delete(`images/${id}`)
+      .pipe(
+        tap({
+          error: (error: HttpErrorResponse): void => {
+            this._errorService.handleApiError(error, 'Wystąpił błąd podczas usuwania zdjęcia.');
+          }
+        })
+      )
+
+  getThumbnailUrl = (image: Image): string => {
+    const url = new URL(image.location);
+
+    return image.hasThumbnail ?
+      `${url.origin}/${image.type}/thumb_${url.pathname.replace(`/${image.type}/`, '')}` :
+      image.location;
+  }
+
+  private _parseImage = (image: any): Image => {
+    const { hasThumbnail, id, location, name, parentId, size, type } = image;
+
+    return {
+      hasThumbnail,
+      id,
+      location,
+      name,
+      parentId,
+      size,
+      type
+    };
+  }
 }
