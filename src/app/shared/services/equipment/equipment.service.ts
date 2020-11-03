@@ -3,11 +3,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Equipment } from '../../models/equipment.model';
 import { ApiService } from '../../../core/api/services/api.service';
 import { ErrorService } from '../error/error.service';
-import { map, take } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SetService } from '../set/set.service';
 import { CategoryService } from '../category/category.service';
 import { EquipmentSearchCriteria } from '../../models/equipment-search.model';
+import { SnackBarService } from '../snack-bar/snack-bar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ import { EquipmentSearchCriteria } from '../../models/equipment-search.model';
 export class EquipmentService {
 
   private _list$: BehaviorSubject<Equipment[]> = new BehaviorSubject<Equipment[]>([]);
+  private _query: EquipmentSearchCriteria;
 
   get list$(): Observable<Equipment[]> {
     return this._list$;
@@ -24,10 +26,13 @@ export class EquipmentService {
     private _api: ApiService,
     private _errorService: ErrorService,
     private _setService: SetService,
-    private _categoryService: CategoryService
-  ) { }
+    private _categoryService: CategoryService,
+    private _snackBarService: SnackBarService
+  ) {}
 
   getList = (query: EquipmentSearchCriteria = null): void => {
+    this._query = query;
+
     this._api.get('equipment', query ? query : {})
       .pipe(
         take(1),
@@ -38,6 +43,19 @@ export class EquipmentService {
       }, (error: HttpErrorResponse): void => {
         this._errorService.handleApiError(error, 'Wystąpił błąd podczas ładowania listy urządzeń.');
       });
+  }
+
+  add = (equipment: any): Observable<void> => {
+    return this._api.post('equipment', equipment)
+      .pipe(
+        take(1),
+        tap((): void => {
+          this.getList(this._query);
+          this._snackBarService.info(`Urządzenie "${equipment.name}" zostało dodane.`);
+        }, (error: HttpErrorResponse): void => {
+          this._errorService.handleApiError(error, 'Wystąpił błąd podczas dodawania urządzenia.');
+        })
+      );
   }
 
   mapItem = (item: any): Equipment => {
