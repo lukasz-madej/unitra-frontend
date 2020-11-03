@@ -5,46 +5,20 @@
         <mat-label>Nazwa</mat-label>
         <input matInput placeholder="Nazwa" formControlName="name" />
       </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Rok produkcji od</mat-label>
-        <input
-          matInput
-          placeholder="Od"
-          [matDatepicker]="pickerFrom"
-          [min]="minDate"
-          [max]="maxDate"
-          formControlName="productionDateFrom"
-          readonly
-        />
-        <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-        <mat-icon matSuffix (click)="clearDateFrom()">close</mat-icon>
-        <mat-datepicker
-          [startView]="'multi-year'"
-          (yearSelected)="onYearSelected($event, pickerFrom, 'productionDateFrom')"
-          disabled="false"
-          #pickerFrom
-        ></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Rok produkcji do</mat-label>
-        <input
-          matInput
-          placeholder="Do"
-          [matDatepicker]="pickerTo"
-          [min]="minDate"
-          [max]="maxDate"
-          formControlName="productionDateTo"
-          readonly
-        />
-        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-        <mat-icon matSuffix (click)="clearDateTo()">close</mat-icon>
-        <mat-datepicker
-          [startView]="'multi-year'"
-          (yearSelected)="onYearSelected($event, pickerTo, 'productionDateTo')"
-          disabled="false"
-          #pickerTo
-        ></mat-datepicker>
-      </mat-form-field>
+      <app-year-picker
+        formControlName="productionDateFrom"
+        [minDate]="minDate"
+        [maxDate]="maxDate"
+        placeholder="Od"
+        label="Rok produkcji od"
+      ></app-year-picker>
+      <app-year-picker
+        formControlName="productionDateTo"
+        [minDate]="minDate"
+        [maxDate]="maxDate"
+        placeholder="Do"
+        label="Rok produkcji do"
+      ></app-year-picker>
       <mat-form-field appearance="outline">
         <mat-label>Numer seryjny</mat-label>
         <input matInput placeholder="Numer seryjny" formControlName="serialNumber" />

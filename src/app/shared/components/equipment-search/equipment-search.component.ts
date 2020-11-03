@@ -43,8 +43,12 @@ export class EquipmentSearchComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.searchForm = this._formBuilder.group({
       name: [null],
-      productionDateFrom: [moment().year(1961)],
-      productionDateTo: [moment()],
+      productionDateFrom: {
+        yearPicker: moment().year(1961)
+      },
+      productionDateTo: {
+        yearPicker: moment()
+      },
       serialNumber: [null],
       category: [null],
       set: [null]
@@ -90,11 +94,6 @@ export class EquipmentSearchComponent implements OnInit, OnDestroy {
     this._unsubscribe$.complete();
   }
 
-  onYearSelected = (normalizedYear: Moment, datePicker: MatDatepicker<any>, formControlName: string): void => {
-    this.searchForm.get(formControlName).setValue(normalizedYear);
-    datePicker.close();
-  }
-
   categoryDisplay = (category: Category): string => category ? category.name : '';
 
   setDisplay = (set: Set): string => set ? set.name : '';
@@ -106,15 +105,6 @@ export class EquipmentSearchComponent implements OnInit, OnDestroy {
 
   submit = (): void => {
     this.search.emit(this._parseSearchParams(this.searchForm.value));
-  }
-
-
-  clearDateFrom = (): void => {
-    this.searchForm.get('productionDateFrom').reset();
-  }
-
-  clearDateTo = (): void => {
-    this.searchForm.get('productionDateTo').reset();
   }
 
   private _filterCategories = (value: any): Category[] => this._filterDropdownOptions(this.categories, value);
@@ -136,8 +126,8 @@ export class EquipmentSearchComponent implements OnInit, OnDestroy {
 
     return {
       name,
-      productionDateFrom,
-      productionDateTo,
+      productionDateFrom: productionDateFrom.yearPicker,
+      productionDateTo: productionDateTo.yearPicker,
       serialNumber,
       categoryName: category && typeof category === 'string' ? category : null,
       categoryId: category && category.id ? category.id : null,

@@ -1,0 +1,22 @@
+<div class="app-year-picker" [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ label }}</mat-label>
+    <input
+      matInput
+      [placeholder]="placeholder"
+      [matDatepicker]="picker"
+      [min]="minDate"
+      [max]="maxDate"
+      formControlName="yearPicker"
+      readonly
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-icon matSuffix (click)="clearDate()">close</mat-icon>
+    <mat-datepicker
+      [startView]="'multi-year'"
+      (yearSelected)="onYearSelected($event, picker)"
+      disabled="false"
+      #picker
+    ></mat-datepicker>
+  </mat-form-field>
+</div>
