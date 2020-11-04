@@ -38,7 +38,7 @@ export class CategoriesListPageComponent implements AfterViewInit, OnDestroy {
     private _changeDetectorRef: ChangeDetectorRef,
     private _dialog: MatDialog
   ) {
-    this.displayedColumns = ['id', 'name', 'description', 'createdAt', 'updatedAt', 'active', 'actions'];
+    this.displayedColumns = ['id', 'name', 'description', 'updatedAt', 'active', 'actions'];
     this.confirmationDialogOptions = {
       title: 'Czy na pewno chcesz usunąć tę kategorię?',
       message: 'Urządzenia przypisane do tej kategorii nie zostaną usunięte.',

@@ -42,7 +42,7 @@ export class EquipmentListPageComponent implements OnInit, AfterViewInit, OnDest
     private _dialog: MatDialog,
     private _router: Router
   ) {
-    this.displayedColumns = ['id', 'name', 'description', 'serialNumber', 'productionYear', 'category', 'set', 'createdAt', 'updatedAt', 'actions'];
+    this.displayedColumns = ['id', 'name', 'description', 'serialNumber', 'productionYear', 'category', 'set', 'updatedAt', 'actions'];
     this.confirmationDialogOptions = {
       title: 'Czy na pewno chcesz usunąć to urządzenie?',
       cancelText: 'Anuluj',

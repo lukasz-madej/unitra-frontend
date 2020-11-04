@@ -40,7 +40,7 @@ export class SetsListPageComponent implements AfterViewInit, OnDestroy {
     private _dialog: MatDialog,
     private _router: Router
   ) {
-    this.displayedColumns = ['id', 'name', 'description', 'createdAt', 'updatedAt', 'active', 'membersCount', 'actions'];
+    this.displayedColumns = ['id', 'name', 'description', 'updatedAt', 'active', 'membersCount', 'actions'];
     this.confirmationDialogOptions = {
       title: 'Czy na pewno chcesz usunąć ten zestaw?',
       message: 'Urządzenia przypisane do tego zestawu nie zostaną usunięte.',
