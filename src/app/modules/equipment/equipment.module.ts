@@ -15,9 +15,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { EditEquipmentComponent } from './components/edit-equipment/edit-equipment.component';
 
 @NgModule({
-  declarations: [EquipmentListPageComponent, AddEquipmentComponent],
+  declarations: [EquipmentListPageComponent, AddEquipmentComponent, EditEquipmentComponent],
   imports: [
     CommonModule,
     EquipmentRoutingModule,

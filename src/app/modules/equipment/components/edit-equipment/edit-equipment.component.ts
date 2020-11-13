@@ -1,22 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Image, ImageType } from '../../../../shared/models/image.model';
-import { ImageService } from '../../../../shared/services/image/image.service';
-import { take } from 'rxjs/operators';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { Moment } from 'moment';
+import { ImageService } from '../../../../shared/services/image/image.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EquipmentService } from '../../../../shared/services/equipment/equipment.service';
+import { take } from 'rxjs/operators';
+import { Equipment } from '../../../../shared/models/equipment.model';
 
 @Component({
-  selector: 'app-add-equipment',
-  templateUrl: './add-equipment.component.html',
-  styleUrls: ['./add-equipment.component.scss']
+  selector: 'app-edit-equipment',
+  templateUrl: './edit-equipment.component.html',
+  styleUrls: ['./edit-equipment.component.scss']
 })
-export class AddEquipmentComponent implements OnInit {
+export class EditEquipmentComponent implements OnInit {
 
   id: number;
   type: ImageType;
+  equipment: Equipment;
   images: Image[];
   equipmentForm: FormGroup;
   minDate: Moment;
@@ -24,25 +26,27 @@ export class AddEquipmentComponent implements OnInit {
 
   constructor(
     private _imageService: ImageService,
-    private _matDialogRef: MatDialogRef<AddEquipmentComponent>,
+    private _matDialogRef: MatDialogRef<EditEquipmentComponent>,
     private _formBuilder: FormBuilder,
-    private _equipmentService: EquipmentService
+    private _equipmentService: EquipmentService,
+    @Inject(MAT_DIALOG_DATA) data
   ) {
-    this.id = null;
+    this.id = data.id;
     this.type = ImageType.EQUIPMENT;
-    this.images = [];
+    this.equipment = data;
+    this.images = data.images;
     this.minDate = moment().year(1961);
     this.maxDate = moment();
   }
 
   ngOnInit(): void {
     this.equipmentForm = this._formBuilder.group({
-      name: ['', [Validators.required]],
-      description:  [''],
-      serialNumber: [''],
-      productionDate: [''],
-      category: [''],
-      set: ['']
+      name: [this.equipment.name, [Validators.required]],
+      description:  [this.equipment.description],
+      serialNumber: [this.equipment.serialNumber],
+      productionDate: [this.equipment.productionDate],
+      category: [this.equipment.category ? this.equipment.category.id : null],
+      set: [this.equipment.set ? this.equipment.set.id : null]
     });
   }
 
@@ -63,9 +67,9 @@ export class AddEquipmentComponent implements OnInit {
       });
   }
 
-  onAdd = (): void => {
+  onSave = (): void => {
     if (this.equipmentForm.valid) {
-      this._equipmentService.add(this._preparePayload(this.equipmentForm.value, this.images), { modal: true })
+      this._equipmentService.edit(this.id, this._preparePayload(this.equipmentForm.value, this.images), { modal: true })
         .subscribe((): void => {
           this._close();
         });
@@ -88,9 +92,10 @@ export class AddEquipmentComponent implements OnInit {
       description,
       serialNumber,
       productionDate,
-      categoryId: category ? category.selector : null,
-      setId: set ? set.selector : null,
+      categoryId: category && category.selector ? category.selector.id : null,
+      setId: set && set.selector ? set.selector.id : null,
       images: images.map((image: Image): number => image.id)
     };
   }
+
 }

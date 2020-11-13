@@ -14,6 +14,7 @@ import { EquipmentSearchCriteria } from '../../../../shared/models/equipment-sea
 import { Router } from '@angular/router';
 import { AddEquipmentComponent } from '../../components/add-equipment/add-equipment.component';
 import { ImageType } from '../../../../shared/models/image.model';
+import { EditEquipmentComponent } from '../../components/edit-equipment/edit-equipment.component';
 
 @Component({
   selector: 'app-equipment-page',
@@ -86,7 +87,11 @@ export class EquipmentListPageComponent implements OnInit, AfterViewInit, OnDest
 
   onEditClick = (event: Equipment): void => {
     this._actionItem = event;
-    this._dialog.open(EditCategoryComponent, { data: event });
+
+    this._equipmentService.get(event.id)
+      .subscribe((equipment: Equipment): void => {
+        this._dialog.open(EditEquipmentComponent, { data: equipment });
+      });
   }
 
   onDeleteClick = (event: Equipment): void => {

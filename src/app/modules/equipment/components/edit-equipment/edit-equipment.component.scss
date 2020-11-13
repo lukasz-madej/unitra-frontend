@@ -1,0 +1,32 @@
+#app-edit-equipment {
+  width: 800px;
+
+  h2 {
+    margin-bottom: 5px;
+  }
+
+  form {
+    .mat-dialog-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 20px;
+
+      .images {
+        .upload, .gallery {
+          margin-bottom: 10px;
+        }
+      }
+
+      .form {
+        .mat-form-field {
+          display: block;
+        }
+      }
+    }
+
+    .mat-dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

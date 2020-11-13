@@ -26,7 +26,7 @@ export class ImageService {
               const progress = Math.round(100 * event.loaded / event.total);
               return { status: ImageUploadStatus.PROGRESS, message: progress };
             case HttpEventType.Response:
-              return { status: ImageUploadStatus.COMPLETE, message: this._parseImage(event.body)};
+              return { status: ImageUploadStatus.COMPLETE, message: this.mapItem(event.body)};
             default:
               return {};
           }
@@ -56,7 +56,7 @@ export class ImageService {
       image.location;
   }
 
-  private _parseImage = (image: any): Image => {
+  mapItem = (image: any): Image => {
     const { hasThumbnail, id, location, name, parentId, size, type } = image;
 
     return {

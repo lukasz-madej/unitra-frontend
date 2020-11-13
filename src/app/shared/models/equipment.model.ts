@@ -1,5 +1,6 @@
 import { Category } from './category.model';
 import { Set } from './set.model';
+import { Image } from './image.model';
 
 export interface Equipment {
   id: number;
@@ -11,4 +12,5 @@ export interface Equipment {
   set: Set;
   createdAt: Date;
   updatedAt: Date;
+  images?: Image[];
 }

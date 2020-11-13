@@ -1,0 +1,61 @@
+<div id="app-edit-equipment">
+  <app-dialog>
+    <form [formGroup]="equipmentForm">
+      <h2 mat-dialog-title>Dodaj urządzenie</h2>
+      <mat-dialog-content>
+        <div class="images">
+          <label>Zdjęcia</label>
+          <div class="upload">
+            <app-image-upload [id]="id" [type]="type" (upload)="onUpload($event)"></app-image-upload>
+          </div>
+          <div class="gallery">
+            <app-image-gallery [images]="images" [allowDelete]="true" (delete)="onDelete($event)"></app-image-gallery>
+          </div>
+        </div>
+        <div class="form">
+          <label>Dane</label>
+          <mat-form-field appearance="outline">
+            <mat-label>Nazwa</mat-label>
+            <input matInput placeholder="Nazwa" formControlName="name" />
+            <mat-error *ngIf="getFormControl('name').invalid">To pole jest wymagane!</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Opis</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+            <mat-error *ngIf="getFormControl('description').invalid">To pole jest wymagane!</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Numer seryjny</mat-label>
+            <input matInput placeholder="Numer seryjny" formControlName="serialNumber" />
+            <mat-error *ngIf="getFormControl('serialNumber').invalid">To pole jest wymagane!</mat-error>
+          </mat-form-field>
+          <app-year-picker
+            formControlName="productionDate"
+            [minDate]="minDate"
+            [maxDate]="maxDate"
+            placeholder="Rok produkcji"
+            label="Rok produkcji"
+          >
+          </app-year-picker>
+          <app-category-selector
+            label="Kategoria"
+            placeholder="Kategoria"
+            formControlName="category"
+            [required]="true"
+          >
+          </app-category-selector>
+          <app-set-selector
+            label="Zestaw"
+            placeholder="Zestaw"
+            formControlName="set"
+          >
+          </app-set-selector>
+        </div>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-raised-button (click)="onCancel()">Anuluj</button>
+        <button mat-raised-button (click)="onSave()" color="primary">Zapisz</button>
+      </mat-dialog-actions>
+    </form>
+  </app-dialog>
+</div>
