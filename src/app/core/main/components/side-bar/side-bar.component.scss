@@ -29,32 +29,40 @@
     padding: 0;
     list-style-type: none;
 
-    hr {
-      margin: 0;
-
-    }
-
     li {
-      display: flex;
-      align-items: center;
-      font-size: 14px;
-      width: 100%;
-      padding: 10px 15px;
-      margin: 3px 0;
-      border: 1px solid transparent;
-      transition: all ease 0.2s;
-
-      &:hover {
-        cursor: pointer;
-        border-color: #eee;
-        border-radius: 4px;
-        box-shadow: 0 1px 10px rgba(0,0,0,0.1);
-        background-color: var(--primary-color);
-        color: #eee;
+      &.header {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+        padding-left: 10px;
+        margin-left: 5px;
+        margin-top: 10px;
+        text-transform: uppercase;
+        color: rgba(0,0,0,.3);
+        letter-spacing: 4px;
       }
 
-      img {
-        height: 20px;
+      &:not(.header) {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        width: 100%;
+        padding: 10px 15px;
+        margin: 3px 0;
+        border: 1px solid transparent;
+        transition: all ease 0.2s;
+        text-transform: capitalize;
+
+        &:hover {
+          cursor: pointer;
+          border-color: #eee;
+          border-radius: 4px;
+          box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+          background-color: var(--primary-color);
+          color: #eee;
+        }
+
+        img {
+          height: 20px;
+        }
       }
     }
   }

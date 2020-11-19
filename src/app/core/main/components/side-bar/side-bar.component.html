@@ -5,11 +5,12 @@
   </div>
   <ul class="navigation">
     <li>Dashboard</li>
-    <hr />
+    <li *ngIf="categories.length" class="header">Przeglądanie</li>
     <li *ngFor="let item of categories">{{ item.name }}</li>
-    <hr *ngIf="categories.length" />
     <li routerLink="sets">Zestawy</li>
-    <li routerLink="equipment">Urządzenia</li>
+    <li class="header">Administracja</li>
     <li routerLink="categories">Kategorie</li>
+    <li routerLink="equipment">Urządzenia</li>
+    <li routerLink="sets">Zestawy</li>
   </ul>
 </div>
