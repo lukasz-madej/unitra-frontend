@@ -30,6 +30,7 @@ import { YearPickerComponent } from './components/year-picker/year-picker.compon
 import { CategorySelectorComponent } from './components/category-selector/category-selector.component';
 import { SetSelectorComponent } from './components/set-selector/set-selector.component';
 import { MatSelectModule } from '@angular/material/select';
+import { IsAdminDirective } from './directives/is-admin/is-admin.directive';
 
 const MY_FORMATS = {
   parse: {
@@ -56,7 +57,8 @@ const MY_FORMATS = {
     ImageGalleryComponent,
     YearPickerComponent,
     CategorySelectorComponent,
-    SetSelectorComponent
+    SetSelectorComponent,
+    IsAdminDirective
   ],
   imports: [
     CommonModule,
@@ -89,7 +91,8 @@ const MY_FORMATS = {
     ImageGalleryComponent,
     YearPickerComponent,
     CategorySelectorComponent,
-    SetSelectorComponent
+    SetSelectorComponent,
+    IsAdminDirective
   ],
   entryComponents: [
     ConfirmationDialogComponent

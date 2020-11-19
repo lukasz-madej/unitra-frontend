@@ -29,5 +29,4 @@ export class SideBarComponent implements OnInit {
         this.categories = response.sort((a: Category, b: Category): number => a.name.localeCompare(b.name));
       });
   }
-
 }

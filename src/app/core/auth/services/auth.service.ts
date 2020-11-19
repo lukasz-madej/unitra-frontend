@@ -8,6 +8,7 @@ import { User } from '../../user/models/user.model';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { UserService } from '../../user/services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,7 @@ export class AuthService {
 
   constructor(
     private _api: ApiService,
+    private _userService: UserService,
     private _router: Router,
     private _dialog: MatDialog
   ) {
@@ -46,20 +48,10 @@ export class AuthService {
     return this._api.post('users/authenticate', credentials)
       .pipe(
         tap((response: any): void => {
-          console.log(response);
           this.token = response.token;
           this.expiresAt = JSON.stringify(moment().add(response.expiresIn, 'seconds').valueOf());
         }),
-        map((response: any): User => {
-          const { username, admin, created_at, updated_at } = response.user;
-
-          return {
-            username,
-            isAdmin: admin,
-            createdAt: new Date(created_at),
-            updatedAt: new Date(updated_at)
-          };
-        }),
+        map((response: any): User => this._userService.mapUser(response.user)),
         shareReplay()
       );
   }

@@ -11,6 +11,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [MainComponent, SideBarComponent, TopBarComponent],
@@ -23,7 +24,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatTooltipModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    SharedModule,
   ]
 })
 export class MainModule { }

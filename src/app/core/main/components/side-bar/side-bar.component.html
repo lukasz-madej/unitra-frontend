@@ -8,9 +8,11 @@
     <li *ngIf="categories.length" class="header">Przeglądanie</li>
     <li *ngFor="let item of categories">{{ item.name }}</li>
     <li routerLink="sets">Zestawy</li>
+  </ul>
+  <ul class="navigation" *appIsAdmin>
     <li class="header">Administracja</li>
-    <li routerLink="categories">Kategorie</li>
-    <li routerLink="equipment">Urządzenia</li>
-    <li routerLink="sets">Zestawy</li>
+    <li routerLink="admin/categories">Kategorie</li>
+    <li routerLink="admin/equipment">Urządzenia</li>
+    <li routerLink="admin/sets">Zestawy</li>
   </ul>
 </div>

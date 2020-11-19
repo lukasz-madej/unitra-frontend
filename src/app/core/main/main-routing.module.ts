@@ -9,18 +9,8 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
-        path: 'categories',
-        loadChildren: () => import('../../modules/categories/categories.module').then((m) => m.CategoriesModule),
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'equipment',
-        loadChildren: () => import('../../modules/equipment/equipment.module').then((m) => m.EquipmentModule),
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'sets',
-        loadChildren: () => import('../../modules/sets/sets.module').then((m) => m.SetsModule),
+        path: 'admin',
+        loadChildren: () => import('../../modules/admin/admin.module').then((m) => m.AdminModule),
         canActivate: [AuthGuard]
       }
     ]
